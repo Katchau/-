@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div class="autism">
     <h1>
       bananas
     </h1>
@@ -14,6 +14,7 @@
 <script>
 export default {
   name: 'Bananas',
+  transition: 't1',
   // TODO https://vuejs.org/v2/guide/computed.html ver se isto dp funciona com estas coizinhas
   data () {
     return {
@@ -25,13 +26,4 @@ export default {
 </script>
 
 <style scoped>
-  #main {
-    margin: 0 auto;
-    min-height: 100vh;
-    display: table;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
 </style>

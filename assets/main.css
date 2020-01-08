@@ -1,0 +1,14 @@
+.t1-enter-active, .t1-leave-active {
+  transition: opacity 1.0s;
+}
+.t1-enter, .t1-leave-to {
+  opacity: 0;
+}
+.autism {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: table;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
