@@ -5,8 +5,13 @@
     </h1>
     <div v-if="loaded">
       <ul class="shopthingy">
-        <li v-for="item in info">
-          <img v-bind:src="item.picture" alt="oops i did it again">
+        <li v-for="(item, index) in info">
+          <img v-bind:src="item.picture" v-bind:alt="item.id">
+          {{ item.name }}
+          {{ item.value.toFixed(2) }} {{ info[id].name }}s
+          <button v-on:click="changearino(index)">
+            Change to this currency
+          </button>
         </li>
       </ul>
     </div>
@@ -26,12 +31,16 @@ export default {
     const banana = currency !== null
     return {
       loaded: banana,
+      id: 0,
       info: currency
     }
   },
   methods: {
     getCurrency () {
       return this.$store.state.currency
+    },
+    changearino (id) {
+      this.id = id
     }
   }
 }
