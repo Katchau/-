@@ -13,22 +13,28 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Poe',
   title: 'Poe a mao na mao do meu senhor',
+  middleware: 'poeCurr',
+  // data () {
+  //   return {
+  //     loaded: false,
+  //     info: {}
+  //   }
+  // },
+  currency: {},
   data () {
+    this.currency = this.getCurrency()
+    const banana = this.currency !== null
     return {
-      loaded: false,
-      info: {}
+      loaded: banana,
+      info: this.currency
     }
   },
-  async asyncData ({ params }) {
-    const { data } = await axios.get(`https://poe.ninja/api/data/currencyoverview?league=Metamorph&type=Currency`)
-    return {
-      info: data,
-      loaded: true
+  methods: {
+    getCurrency () {
+      return this.$store.state.currency
     }
   }
 }
