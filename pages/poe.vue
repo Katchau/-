@@ -4,10 +4,14 @@
       Será que isto irá funcionar?
     </h1>
     <div v-if="loaded">
-      {{ info }}
+      <ul class="shopthingy">
+        <li v-for="item in info">
+          <img v-bind:src="item.picture" alt="oops i did it again">
+        </li>
+      </ul>
     </div>
     <div v-else>
-      NOPE
+      NOPE try again l8
     </div>
   </div>
 </template>
@@ -17,19 +21,12 @@ export default {
   name: 'Poe',
   title: 'Poe a mao na mao do meu senhor',
   middleware: 'poeCurr',
-  // data () {
-  //   return {
-  //     loaded: false,
-  //     info: {}
-  //   }
-  // },
-  currency: {},
   data () {
-    this.currency = this.getCurrency()
-    const banana = this.currency !== null
+    const currency = this.getCurrency()
+    const banana = currency !== null
     return {
       loaded: banana,
-      info: this.currency
+      info: currency
     }
   },
   methods: {
@@ -41,5 +38,7 @@ export default {
 </script>
 
 <style scoped>
-
+.shopthingy{
+  list-style: none
+}
 </style>
