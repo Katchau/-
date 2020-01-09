@@ -25,7 +25,7 @@
 export default {
   name: 'Poe',
   title: 'Poe a mao na mao do meu senhor',
-  middleware: 'poeCurr',
+  middleware: 'poe',
   data () {
     const currency = this.getCurrency()
     const banana = currency !== null
