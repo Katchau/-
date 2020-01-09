@@ -41,8 +41,15 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    target: 'https://poe.ninja/api/data'
+  },
   /*
   ** Build configuration
   */
