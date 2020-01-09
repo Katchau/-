@@ -8,8 +8,8 @@
         <li v-for="(item, index) in info">
           <img v-bind:src="item.picture" v-bind:alt="item.id">
           {{ item.name }}
-          {{ item.value.toFixed(2) }} {{ info[id].name }}s
-          <button v-on:click="changearino(index)">
+          {{ (item.value * ratio).toFixed(5) }} {{ info[id].name }}s
+          <button v-on:click="changearino(index, item.value)">
             Change to this currency
           </button>
         </li>
@@ -32,15 +32,22 @@ export default {
     return {
       loaded: banana,
       id: 0,
+      ratio: 1,
       info: currency
     }
   },
+  // watch: {
+  //   ratio (oldValue, newValue) {
+  //     this.$store.dispatch()
+  //   }
+  // },
   methods: {
     getCurrency () {
       return this.$store.state.currency
     },
-    changearino (id) {
+    changearino (id, value) {
       this.id = id
+      this.ratio = 1 / value
     }
   }
 }

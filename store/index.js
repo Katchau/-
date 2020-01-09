@@ -34,5 +34,13 @@ export const actions = {
       ret.push(tmp)
     })
     commit('SET_CURRENCY', ret)
+  },
+  updateRatio ({ commit }, currency, ratio) {
+    const ret = []
+    ret.push(currency.filter(function (item) {
+      item.value *= ratio
+      return item
+    }))
+    commit('SET_CURRENCY', ret)
   }
 }
