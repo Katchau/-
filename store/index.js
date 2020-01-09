@@ -4,12 +4,20 @@ id - name - picture - value (chaos worth)
  */
 
 export const state = () => ({
-  currency: null
+  currency: null,
+  items: null,
+  selection: null
 })
 
 export const mutations = {
   SET_CURRENCY (state, currency) {
     state.currency = currency
+  },
+  SET_SELECTION (state, page) {
+    state.selection = page
+  },
+  SET_ITEM (state, items) {
+    state.items = items
   }
 }
 
@@ -42,5 +50,21 @@ export const actions = {
       return item
     }))
     commit('SET_CURRENCY', ret)
+  },
+  setSelection ({ commit }, selection) {
+    commit('SET_SELECTION', selection)
+  },
+  setItems ({ commit }, items) {
+    const lines = items.lines
+    const ret = []
+    lines.forEach((obj) => {
+      const tmp = {}
+      tmp.name = obj.name
+      tmp.id = obj.id
+      tmp.value = obj.chaosValue
+      tmp.picture = obj.icon
+      ret.push(tmp)
+    })
+    commit('SET_ITEM', ret)
   }
 }

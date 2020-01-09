@@ -47,3 +47,7 @@ app.get('/test', function (req, res) {
 app.get('/getCurrency', function (req, res) {
   require('./ninjaAPI/currency').getCurrency(req, res)
 })
+
+app.get('/getItems', function (req, res) {
+  require('./ninjaAPI/items').getItems(req, res)
+})

@@ -1,9 +1,9 @@
 module.exports.baseURL = `https://poe.ninja/api/data/`
 module.exports.standardLeague = `&league=Standard`
 module.exports.currency = `currencyoverview?&type=Currency`
+module.exports.fragment = `currencyoverview?type=Fragment`
 module.exports.divCard = `itemoverview?type=DivinationCard`
 module.exports.essence = `itemoverview?type=Essence`
-module.exports.fragment = `currencyoverview?type=Fragment`
 module.exports.prophecy = `itemoverview?type=Prophecy`
 module.exports.uniqueAccessory = `itemoverview?type=UniqueAccessory`
 module.exports.uniqueArmour = `itemoverview?type=UniqueArmour`
