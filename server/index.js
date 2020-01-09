@@ -44,6 +44,6 @@ app.get('/test', function (req, res) {
   res.send('works!')
 })
 
-app.get('/test2', function (req, res) {
+app.get('/getCurrency', function (req, res) {
   require('./ninjaAPI/currency').getCurrency(req, res)
 })
