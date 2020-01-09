@@ -24,6 +24,13 @@ async function start () {
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
+  // this is to ignore the god damned CORS errors
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    next()
+  })
   // Listen the server
   app.listen(port, host)
   consola.ready({
@@ -32,3 +39,11 @@ async function start () {
   })
 }
 start()
+
+app.get('/test', function (req, res) {
+  res.send('works!')
+})
+
+app.get('/test2', function (req, res) {
+  require('./ninjaAPI/currency').getCurrency(req, res)
+})
