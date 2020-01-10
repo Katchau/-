@@ -1,7 +1,10 @@
 <template>
   <div class="autism">
     <div>
-      <input v-model="answer">
+      <h1>
+        Será que isto irá funcionar?
+      </h1>
+      <Dropdown :obj-data="tmp" @setSelectedOption="selectOption ($event)" />
       <button v-on:click="changePage">
         Let's fly awayyyyyyyyyyyyyyy
       </button>
@@ -12,24 +15,34 @@
 
 <script>
 import StoreThingy from '../components/StoreThingy'
+import Dropdown from '../components/Dropdown'
+import itemTypes from '~/assets/poeItemTypes'
 
 export default {
   name: 'Poe',
   components: {
-    StoreThingy
+    StoreThingy,
+    Dropdown
   },
   middleware: 'poeCurr',
   data () {
     return {
-      answer: ''
+      answer: '',
+      tmp: itemTypes.getItemTypes()
     }
   },
   methods: {
     changePage () {
-      this.$store.dispatch('setSelection', this.answer)
+      if (this.answer === '') {
+        return
+      }
       this.$router.push({
         path: '/poeItems/' + this.answer
       })
+    },
+    selectOption (obj) {
+      this.answer = obj
+      this.$store.dispatch('setSelection', this.answer)
     }
   }
 }

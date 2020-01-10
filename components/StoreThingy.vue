@@ -1,8 +1,5 @@
 <template>
   <div class="autism">
-    <h1>
-      Será que isto irá funcionar?
-    </h1>
     <div v-if="loaded">
       <ul class="shopthingy">
         <li v-for="(item, index) in info">
