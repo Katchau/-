@@ -51,3 +51,7 @@ app.get('/getCurrency', function (req, res) {
 app.get('/getItems', function (req, res) {
   require('./ninjaAPI/items').getItems(req, res)
 })
+
+app.get('/searchItem', function (req, res) {
+  require('./poeAPI/search').searchItem(req, res)
+})
