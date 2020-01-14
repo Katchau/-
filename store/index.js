@@ -56,6 +56,10 @@ export const actions = {
   },
   setItems ({ commit }, items) {
     const lines = items.lines
+    if (lines === undefined) {
+      commit('SET_ITEM', [])
+      return
+    }
     const ret = []
     lines.forEach((obj) => {
       const tmp = {}

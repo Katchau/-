@@ -15,6 +15,13 @@ export default {
     return {
       type: this.$route.params.type
     }
+  },
+  beforeCreate () {
+    if (this.$store.state.selection === null || this.$store.state.items.length === 0) {
+      this.$router.push({
+        path: '/poe'
+      })
+    }
   }
 }
 </script>
