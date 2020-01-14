@@ -83,7 +83,7 @@ export const actions = {
       tmp.time = obj.listing.indexed
       tmp.whisperMsg = obj.listing.whisper
       tmp.price = obj.listing.price
-      tmp.icon = obj.item.icon
+      tmp.picture = obj.item.icon
       tmp.itemDetails = obj.item
       ret.push(tmp)
     })
