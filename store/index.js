@@ -67,7 +67,7 @@ export const actions = {
     const ret = []
     lines.forEach((obj) => {
       const tmp = {}
-      tmp.name = obj.name
+      tmp.name = (obj.links !== undefined && obj.links !== 0) ? obj.name + ' with ' + obj.links + ' links' : obj.name
       tmp.id = obj.id
       tmp.value = obj.chaosValue
       tmp.picture = obj.icon
@@ -78,6 +78,9 @@ export const actions = {
   },
   setSearchResults ({ commit }, results) {
     const ret = []
+    if (results.result === undefined || results.result.length === 0) {
+      return commit('SET_RESULTS', [])
+    }
     results.result.forEach((obj) => {
       const tmp = {}
       tmp.time = obj.listing.indexed

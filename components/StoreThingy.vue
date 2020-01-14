@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
   .shopthingy{
-    list-style: none
+    list-style: none;
+    display: table;
   }
 </style>

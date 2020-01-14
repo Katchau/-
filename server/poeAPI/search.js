@@ -5,20 +5,20 @@ const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
 
 // TODO item not god damn hardcoded
-module.exports.searchItem = function (req, res) {
+module.exports.searchItem = function (req, res, itemInfo) {
   const searchInfo = {
     query: {
-      filters: {
-        trade_filters: {
-          disabled: false,
-          filters: {
-            price: {
-              min: 1,
-              max: 50
-            }
-          }
-        }
-      },
+      // filters: {
+      //   trade_filters: {
+      //     disabled: false,
+      //     filters: {
+      //       price: {
+      //         min: 1,
+      //         max: 50
+      //       }
+      //     }
+      //   }
+      // },
       status: {
         option: 'online'
       },
@@ -26,8 +26,8 @@ module.exports.searchItem = function (req, res) {
         type: 'and',
         filters: []
       }],
-      name: 'Tabula Rasa',
-      type: 'Simple Robe'
+      name: itemInfo.name.toString(),
+      type: itemInfo.type.toString()
     },
     sort: {
       price: 'asc'
