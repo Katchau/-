@@ -3,7 +3,7 @@
     <div v-if="loaded">
       <ul class="shopthingy">
         <li v-for="(item, index) in info">
-          <img v-bind:src="item.picture" v-bind:alt="item.id">
+          <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
           {{ item.name }}
           {{ (item.value * ratio).toFixed(5) }}
           <span v-if="isCurrency">
@@ -48,6 +48,11 @@ export default {
     changearino (id, value) {
       this.id = id
       this.ratio = 1 / value
+    },
+    searchItem (item) {
+      if (!this.isCurrency) {
+        this.$emit('setSelectedItem', item)
+      }
     }
   }
   // watch: {

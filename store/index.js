@@ -6,7 +6,8 @@ id - name - picture - value (chaos worth)
 export const state = () => ({
   currency: null,
   items: null,
-  selection: null
+  selection: null,
+  searchResults: null
 })
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   SET_ITEM (state, items) {
     state.items = items
+  },
+  SET_RESULTS (state, results) {
+    state.searchResults = results
   }
 }
 
@@ -67,8 +71,22 @@ export const actions = {
       tmp.id = obj.id
       tmp.value = obj.chaosValue
       tmp.picture = obj.icon
+      tmp.baseType = obj.baseType
       ret.push(tmp)
     })
     commit('SET_ITEM', ret)
+  },
+  setSearchResults ({ commit }, results) {
+    const ret = []
+    results.result.forEach((obj) => {
+      const tmp = {}
+      tmp.time = obj.listing.indexed
+      tmp.whisperMsg = obj.listing.whisper
+      tmp.price = obj.listing.price
+      tmp.icon = obj.item.icon
+      tmp.itemDetails = obj.item
+      ret.push(tmp)
+    })
+    commit('SET_RESULTS', ret)
   }
 }

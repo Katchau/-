@@ -1,5 +1,5 @@
 <template>
-  <StoreThingy />
+  <StoreThingy @setSelectedItem="searchTradeItem ($event)" />
 </template>
 
 <script>
@@ -22,10 +22,25 @@ export default {
         path: '/poe'
       })
     }
+  },
+  methods: {
+    searchTradeItem (obj) {
+      if (obj.baseType === undefined) {
+        return
+      }
+      this.$router.push({
+        path: '/poeItems/currentMarket/' + obj.name + '&' + obj.baseType
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-
+image:hover{
+  cursor: pointer;
+}
+image:active{
+  cursor: wait;
+}
 </style>
