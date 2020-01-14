@@ -31,7 +31,7 @@ export default {
   data () {
     const currency = this.getObjects()
     const banana = currency !== null
-    const type = (banana || currency[0].id === 1)
+    const type = (currency.length === 0 || currency[0].id === 1)
     return {
       loaded: banana,
       id: 0,
