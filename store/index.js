@@ -67,7 +67,8 @@ export const actions = {
     const ret = []
     lines.forEach((obj) => {
       const tmp = {}
-      tmp.name = (obj.links !== undefined && obj.links !== 0) ? obj.name + ' with ' + obj.links + ' links' : obj.name
+      tmp.name = obj.name
+      tmp.displayName = (obj.links !== undefined && obj.links !== 0) ? obj.name + ' with ' + obj.links + ' links' : obj.name
       tmp.id = obj.id
       tmp.value = obj.chaosValue
       tmp.picture = obj.icon

@@ -4,7 +4,7 @@
       <ul class="shopthingy">
         <li v-for="(item, index) in info">
           <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
-          {{ item.name }}
+          {{ item.displayName || item.name }}
           {{ (item.value * ratio).toFixed(5) }}
           <span v-if="isCurrency">
             {{ info[id].name }}s
