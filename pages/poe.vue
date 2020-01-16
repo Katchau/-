@@ -21,8 +21,7 @@ import itemTypes from '~/assets/poeItemTypes'
 export default {
   name: 'Poe',
   components: {
-    StoreThingy,
-    Dropdown
+    StoreThingy
   },
   data () {
     return {
