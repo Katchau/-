@@ -16,6 +16,7 @@ export default {
       type: this.$route.params.type
     }
   },
+  // idealmente isto seria com validate ou assim. se fosse enviado por parametros ou assim e quisessemos rejeitar
   beforeCreate () {
     if (this.$store.state.selection === null || this.$store.state.items.length === 0) {
       this.$router.push({
@@ -36,11 +37,11 @@ export default {
 }
 </script>
 
-<style scoped>
-image:hover{
-  cursor: pointer;
-}
-image:active{
-  cursor: wait;
-}
+<style slot-scope="component">
+  img:hover, img.nuxt-link-active {
+    cursor: pointer;
+  }
+  img:active {
+    cursor: wait;
+  }
 </style>
