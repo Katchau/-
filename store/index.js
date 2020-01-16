@@ -26,6 +26,17 @@ export const mutations = {
 }
 
 export const actions = {
+  nuxtServerInit (vuexContext, { $axios }) {
+    return $axios.get('/getCurrency')
+      .then(({ data }) => {
+        vuexContext.commit('SET_SELECTION', 'currency')
+        vuexContext.dispatch('setCurrency', data)
+      })
+      .catch((e) => {
+        vuexContext.commit('SET_SELECTION', 'currency')
+        vuexContext.dispatch('setCurrency', [])
+      })
+  },
   setCurrency ({ commit }, currency) {
     const lines = currency.lines
     const details = currency.currencyDetails
@@ -92,5 +103,11 @@ export const actions = {
       ret.push(tmp)
     })
     commit('SET_RESULTS', ret)
+  }
+}
+
+export const getters = {
+  searchResults (state) {
+    return state.searchResults
   }
 }

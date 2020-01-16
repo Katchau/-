@@ -24,13 +24,13 @@ export default {
     StoreThingy,
     Dropdown
   },
-  middleware: 'poeCurr',
   data () {
     return {
       answer: '',
       tmp: itemTypes.getItemTypes()
     }
   },
+  // middleware: 'poeCurr',
   methods: {
     changePage () {
       if (this.answer === '') {
