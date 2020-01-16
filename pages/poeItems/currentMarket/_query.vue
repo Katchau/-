@@ -39,6 +39,7 @@ export default {
   // },
   // middleware: 'poeTrade',
   // isto vai dar ao mesmo que asyncData só que este necessita de dar return para dar merge com os dados a cima, enquanto que o fetch dá mais jeito para fazer pedidos
+  // oops agr isto é asyncData. de qq das maneiras, isto com fetch daria ao msm, só que não seria necessário o return e teria de usar um computed para is buscar à store
   asyncData (context) {
     // return new Promise((resolve, reject) => {
     //   console.log('olup') resolve para o codigo que queres lancar seguigo de then e catch

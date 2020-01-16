@@ -30,7 +30,7 @@ export default {
       tmp: itemTypes.getItemTypes()
     }
   },
-  // middleware: 'poeCurr',
+  middleware: 'poeCurr',
   methods: {
     changePage () {
       if (this.answer === '') {
