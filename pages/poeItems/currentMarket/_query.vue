@@ -46,7 +46,7 @@ export default {
     //   console.log('olup') resolve para o codigo que queres lancar seguigo de then e catch
     // })
     const tmp = context.route.params.query.toString().split('&')
-    return context.$axios.get('/searchItem?name=' + tmp[0] + '&type=' + tmp[1])
+    return context.$axios.get(`/searchItem?name=${tmp[0]}&type=${tmp[1]}`)
       .then(({ data }) => {
         context.store.dispatch('setSearchResults', data)
         return {

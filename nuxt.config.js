@@ -43,7 +43,8 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/vuetify'
   ],
   axios: {
     proxy: true

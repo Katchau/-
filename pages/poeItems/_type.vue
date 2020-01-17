@@ -36,7 +36,7 @@ export default {
         return
       }
       this.$router.push({
-        path: '/poeItems/currentMarket/' + obj.name + '&' + obj.baseType
+        path: `/poeItems/currentMarket/${obj.name}&${obj.baseType}`
       })
     }
 

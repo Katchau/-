@@ -39,7 +39,7 @@ export default {
         return
       }
       this.$router.push({
-        path: '/poeItems/' + this.answer
+        path: `/poeItems/${this.answer}`
       })
     },
 
