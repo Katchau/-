@@ -12,14 +12,14 @@
           <span v-else>
             Chaos Orbs
           </span>
-          <button v-if="isCurrency" v-on:click="changearino(index, item.value)">
+          <v-btn v-if="isCurrency" v-on:click="changearino(index, item.value)" rounded>
             Change to this currency
-          </button>
+          </v-btn>
         </li>
       </ul>
     </div>
     <div v-else>
-      NOPE try again l8
+      {{ throwError }}
     </div>
   </div>
 </template>
@@ -39,6 +39,15 @@ export default {
       ratio: 1,
       isCurrency: type,
       info: currency
+    }
+  },
+
+  computed: {
+    getCurrencyList () {
+      return this.$store.getters.currency
+    },
+    throwError () {
+      return this.$nuxt.error({ statusCode: 619, message: 'PoE API data is unavailable right now' })
     }
   },
 
@@ -73,5 +82,8 @@ export default {
   .shopthingy{
     list-style: none;
     display: table;
+  }
+  .v-btn{
+    text-transform: lowercase;
   }
 </style>

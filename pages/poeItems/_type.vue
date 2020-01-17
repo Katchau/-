@@ -23,9 +23,10 @@ export default {
   // idealmente isto seria com validate ou assim. se fosse enviado por parametros ou assim e quisessemos rejeitar
   beforeCreate () {
     if (this.$store.state.selection === null || this.$store.state.items.length === 0) {
-      this.$router.push({
-        path: '/poe'
-      })
+      // this.$router.push({
+      //   path: '/poe'
+      // })
+      return this.$nuxt.error({ statusCode: 404, message: 'Invalid URL' })
     }
   },
 

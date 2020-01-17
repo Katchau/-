@@ -5,9 +5,9 @@
         Será que isto irá funcionar?
       </h1>
       <Dropdown :obj-data="tmp" @setSelectedOption="selectOption ($event)" />
-      <button v-on:click="changePage">
+      <v-btn v-on:click="changePage" small>
         Let's fly awayyyyyyyyyyyyyyy
-      </button>
+      </v-btn>
     </div>
     <StoreThingy />
   </div>

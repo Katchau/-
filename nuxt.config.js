@@ -36,15 +36,15 @@ module.exports = {
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/proxy'
   ],
   axios: {
     proxy: true

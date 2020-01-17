@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <nuxt />
-  </div>
+  <v-app id="pray">
+    <v-content>
+      <NavHeader @hideDrawer="changeCenas($event)" />
+      <NavBar :drawer-info="drawerInfo" />
+      <div>
+        werwerwer
+      </div>
+      <nuxt />
+    </v-content>
+  </v-app>
 </template>
 
 <style>
@@ -53,3 +60,25 @@ html {
   background-color: #35495e;
 }
 </style>
+<script>
+import NavHeader from '../components/PageSections/NavHeader'
+import NavBar from '../components/PageSections/NavBar'
+export default {
+  components: { NavBar, NavHeader },
+  data () {
+    return {
+      drawerInfo: {
+        model: null,
+        clipped: true,
+        floating: true,
+        temporary: false
+      }
+    }
+  },
+  methods: {
+    changeCenas () {
+      this.drawerInfo.model = !this.drawerInfo.model
+    }
+  }
+}
+</script>

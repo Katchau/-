@@ -18,22 +18,28 @@ export default {
       required: true
     }
   },
+
   data () {
     return {
       obj: []
     }
   },
+
   created () {
     this.setObjData()
   },
+
   methods: {
+
     setObjData () {
       this.obj = this.objData
     },
+
     selectOption () {
       const value = document.getElementById('dropdownCenas').value
       this.$emit('setSelectedOption', value)
     }
+
   }
 }
 </script>
