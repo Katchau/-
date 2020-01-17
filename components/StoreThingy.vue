@@ -28,6 +28,7 @@
 export default {
   name: 'StoreThingy',
   // middleware: 'poeCurr',
+
   data () {
     const currency = this.getObjects()
     const banana = currency !== null
@@ -40,20 +41,25 @@ export default {
       info: currency
     }
   },
+
   methods: {
+
     getObjects () {
       const tmp = this.$store.state.selection === 'currency'
       return (tmp) ? this.$store.state.currency : this.$store.state.items
     },
+
     changearino (id, value) {
       this.id = id
       this.ratio = 1 / value
     },
+
     searchItem (item) {
       if (!this.isCurrency) {
         this.$emit('setSelectedItem', item)
       }
     }
+
   }
   // watch: {
   //   ratio (oldValue, newValue) {

@@ -11,21 +11,27 @@ export const state = () => ({
 })
 
 export const mutations = {
+
   SET_CURRENCY (state, currency) {
     state.currency = currency
   },
+
   SET_SELECTION (state, page) {
     state.selection = page
   },
+
   SET_ITEM (state, items) {
     state.items = items
   },
+
   SET_RESULTS (state, results) {
     state.searchResults = results
   }
+
 }
 
 export const actions = {
+
   nuxtServerInit (vuexContext, context) {
     return context.$axios.get('/getCurrency')
       .then(({ data }) => {
@@ -36,6 +42,7 @@ export const actions = {
         vuexContext.dispatch('setCurrency', [])
       })
   },
+
   setCurrency ({ commit }, currency) {
     const lines = currency.lines
     const details = currency.currencyDetails
@@ -57,17 +64,11 @@ export const actions = {
     })
     commit('SET_CURRENCY', ret)
   },
-  updateRatio ({ commit }, currency, ratio) {
-    const ret = []
-    ret.push(currency.filter(function (item) {
-      item.value *= ratio
-      return item
-    }))
-    commit('SET_CURRENCY', ret)
-  },
+
   setSelection ({ commit }, selection) {
     commit('SET_SELECTION', selection)
   },
+
   setItems ({ commit }, items) {
     const lines = items.lines
     if (lines === undefined) {
@@ -87,6 +88,7 @@ export const actions = {
     })
     commit('SET_ITEM', ret)
   },
+
   setSearchResults ({ commit }, results) {
     const ret = []
     if (results.result === undefined || results.result.length === 0) {
@@ -103,10 +105,25 @@ export const actions = {
     })
     commit('SET_RESULTS', ret)
   }
+
 }
 
 export const getters = {
+
   searchResults (state) {
     return state.searchResults
+  },
+
+  currency (state) {
+    return state.currency
+  },
+
+  items (state) {
+    return state.items
+  },
+
+  selection (state) {
+    return state.selection
   }
+
 }

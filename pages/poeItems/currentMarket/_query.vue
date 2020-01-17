@@ -26,6 +26,7 @@
 
 export default {
   name: 'Query',
+
   computed: {
     title () {
       return this.$route.params.query.toString().replace('&', ' ')

@@ -15,21 +15,24 @@
 
 <script>
 import StoreThingy from '../components/StoreThingy'
-import Dropdown from '../components/Dropdown'
 import itemTypes from '~/assets/poeItemTypes'
 
 export default {
   name: 'Poe',
+
   components: {
     StoreThingy
   },
+
   data () {
     return {
       answer: '',
       tmp: itemTypes.getItemTypes()
     }
   },
+
   middleware: 'poeCurr',
+
   methods: {
     changePage () {
       if (this.answer === '') {
@@ -39,10 +42,12 @@ export default {
         path: '/poeItems/' + this.answer
       })
     },
+
     selectOption (obj) {
       this.answer = obj
       this.$store.dispatch('setSelection', this.answer)
     }
+
   }
 }
 </script>

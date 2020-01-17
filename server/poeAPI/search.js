@@ -4,7 +4,7 @@ const url = 'https://www.pathofexile.com/api/trade/search/Standard'
 const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
 
-// TODO item not god damn hardcoded
+// TODO update the query settings
 module.exports.searchItem = function (req, res, itemInfo) {
   const searchInfo = {
     query: {
@@ -39,6 +39,7 @@ module.exports.searchItem = function (req, res, itemInfo) {
     body: searchInfo,
     json: true
   }
+
   request.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       if (body.result === undefined) {
@@ -68,6 +69,7 @@ module.exports.searchItem = function (req, res, itemInfo) {
     }
   })
 }
+
 // https://www.pathofexile.com/api/trade/fetch/5e05e41a97a0b7b4584e7e8ab4855bf66c892c0da4b01dc08f4e9b682826959c%2C48f256545c03f04ea6ce4a7420c025a26133f12f841fd72666e767424e6104e1?query=q9knr6kFg
 function fetchItem (res, items) {
   const tmp = fetchUrl + items.result + '?query=' + items.searchId
