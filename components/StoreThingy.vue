@@ -1,6 +1,7 @@
 <template>
   <div class="autism">
     <div v-if="loaded">
+      <Dropdown v-if="!isCurrency" :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino ($event)" />
       <ul class="shopthingy">
         <li v-for="(item) in info">
           <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
@@ -10,7 +11,7 @@
             {{ ratio.name }}s
           </span>
           <span v-else>
-            <Dropdown :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino2 ($event)" />
+            <img v-bind:src="ratio.picture" v-bind:alt="ratio.id">
           </span>
           <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
             Change to this currency
@@ -40,9 +41,6 @@ export default {
   },
 
   computed: {
-    getCurrencyList () {
-      return this.$store.getters.currency
-    },
     throwError () {
       return this.$nuxt.error({ statusCode: 619, message: 'PoE API data is unavailable right now' })
     }
@@ -56,11 +54,7 @@ export default {
     this.isCurrency = type
     this.info = objList
     this.ratio = this.$store.getters.ratio
-    this.fds = [{
-      name: 'wtf',
-      value: 1,
-      picture: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png'
-    }]
+    this.fds = this.$store.getters.currency
   },
 
   methods: {

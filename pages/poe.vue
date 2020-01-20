@@ -27,7 +27,10 @@ export default {
   data () {
     return {
       answer: '',
-      tmp: itemTypes.getItemTypes()
+      tmp: itemTypes.getItemTypes().map((obj) => {
+        obj.picture = `images/sidebar/${obj.picture}`
+        return obj
+      })
     }
   },
 
@@ -44,7 +47,7 @@ export default {
     },
 
     selectOption (obj) {
-      this.answer = obj
+      this.answer = obj.value
       this.$store.dispatch('setSelection', this.answer)
     }
 

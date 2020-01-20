@@ -1,17 +1,31 @@
 <template>
-  <select id="dropdownCenas" @change="selectOption" name="option selection">
-    <option v-if="!isImageType" value="" selected disabled hidden>
-      <p>
-        Choose on of the following
-      </p>
-    </option>
-    <option v-if="!isImageType" v-for="item in obj" v-bind:value="item.value">
-      {{ item.name }}
-    </option>
-    <option v-else v-for="item in obj" v-bind:value="item.value" v-bind:style="getImgURL(item.picture)">
-      {{ item.name }}
-    </option>
-  </select>
+  <v-select
+    @input="selectOption"
+    :items="obj"
+    :readonly="false"
+    :return-object="true"
+    v-model="answer"
+    class="dropdownCenas"
+    item-text="name"
+    item-value="value"
+    label="Choose on of the following"
+    name="option selection"
+  >
+    <template slot="selection" slot-scope="data">
+      <v-flex xs2>
+        <v-avatar size="25px">
+          <img :src="data.item.picture" alt="">
+        </v-avatar>
+      </v-flex>
+      <v-flex class="ml-1">
+        {{ data.item.name }}
+      </v-flex>
+    </template>
+    <template slot="item" slot-scope="data">
+      <v-img :src="data.item.picture" :max-height="50" :max-width="50" alt="" />
+      <v-list-item-title v-html="data.item.name" />
+    </template>
+  </v-select>
 </template>
 
 <script>
@@ -31,7 +45,8 @@ export default {
 
   data () {
     return {
-      obj: []
+      obj: [],
+      answer: null
     }
   },
 
@@ -46,8 +61,7 @@ export default {
     },
 
     selectOption () {
-      const value = document.getElementById('dropdownCenas').value
-      this.$emit('setSelectedOption', value)
+      this.$emit('setSelectedOption', this.answer)
     },
 
     getImgURL (url) {
