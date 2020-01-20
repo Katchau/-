@@ -5,6 +5,12 @@ id - name - picture - value (chaos worth)
 
 export const state = () => ({
   currency: null,
+  ratio: {
+    id: 1,
+    value: 1,
+    picture: '',
+    name: ''
+  },
   items: null,
   selection: null,
   searchResults: null
@@ -14,6 +20,10 @@ export const mutations = {
 
   SET_CURRENCY (state, currency) {
     state.currency = currency
+  },
+
+  SET_RATIO (state, ratio) {
+    state.ratio = ratio
   },
 
   SET_SELECTION (state, page) {
@@ -43,7 +53,7 @@ export const actions = {
       })
   },
 
-  setCurrency ({ commit }, currency) {
+  setCurrency (vueContext, currency) {
     const lines = currency.lines
     const details = currency.currencyDetails
     const ret = []
@@ -62,7 +72,13 @@ export const actions = {
       tmp.picture = details[tmp.id - 1].icon
       ret.push(tmp)
     })
-    commit('SET_CURRENCY', ret)
+    vueContext.commit('SET_CURRENCY', ret)
+    vueContext.dispatch('setRatio', ret[0])
+  },
+
+  setRatio ({ commit }, obj) {
+    // obj.value = 1 / obj.value
+    commit('SET_RATIO', obj)
   },
 
   setSelection ({ commit }, selection) {
@@ -112,6 +128,10 @@ export const getters = {
 
   searchResults (state) {
     return state.searchResults
+  },
+
+  ratio (state) {
+    return state.ratio
   },
 
   currency (state) {

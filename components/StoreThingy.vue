@@ -2,17 +2,17 @@
   <div class="autism">
     <div v-if="loaded">
       <ul class="shopthingy">
-        <li v-for="(item, index) in info">
+        <li v-for="(item) in info">
           <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
           {{ item.displayName || item.name }}
-          {{ (item.value * ratio).toFixed(5) }}
+          {{ (item.value / ratio.value).toFixed(5) }}
           <span v-if="isCurrency">
-            {{ info[id].name }}s
+            {{ ratio.name }}s
           </span>
           <span v-else>
             Chaos Orbs
           </span>
-          <v-btn v-if="isCurrency" v-on:click="changearino(index, item.value)" rounded>
+          <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
             Change to this currency
           </v-btn>
         </li>
@@ -32,8 +32,7 @@ export default {
   data () {
     return {
       loaded: false,
-      id: 0,
-      ratio: 1,
+      ratio: null,
       isCurrency: false,
       info: []
     }
@@ -55,6 +54,7 @@ export default {
     this.loaded = loaded
     this.isCurrency = type
     this.info = objList
+    this.ratio = this.$store.getters.ratio
   },
 
   methods: {
@@ -64,9 +64,10 @@ export default {
       return (tmp) ? this.$store.getters.currency : this.$store.getters.items
     },
 
-    changearino (id, value) {
-      this.id = id
-      this.ratio = 1 / value
+    changearino (obj) {
+      this.$store.dispatch('setRatio', obj)
+      this.ratio = this.$store.getters.ratio
+      // console.log(this.$store.getters.ratio)
     },
 
     searchItem (item) {
