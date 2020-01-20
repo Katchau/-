@@ -12,9 +12,9 @@
     name="option selection"
   >
     <template slot="selection" slot-scope="data">
-      <v-flex xs2>
+      <v-flex v-if="isImageType" xs2>
         <v-avatar size="25px">
-          <img :src="data.item.picture" alt="">
+          <img v-if="isImageType" :src="data.item.picture" alt="">
         </v-avatar>
       </v-flex>
       <v-flex class="ml-1">
@@ -22,7 +22,7 @@
       </v-flex>
     </template>
     <template slot="item" slot-scope="data">
-      <v-img :src="data.item.picture" :max-height="50" :max-width="50" alt="" />
+      <v-img v-if="isImageType" :src="data.item.picture" :max-height="50" :max-width="50" alt="" />
       <v-list-item-title v-html="data.item.name" />
     </template>
   </v-select>
