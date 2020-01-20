@@ -30,15 +30,12 @@ export default {
   // middleware: 'poeCurr',
 
   data () {
-    const currency = this.getObjects()
-    const banana = currency !== null
-    const type = (currency.length === 0 || currency[0].id === 1)
     return {
-      loaded: banana,
+      loaded: false,
       id: 0,
       ratio: 1,
-      isCurrency: type,
-      info: currency
+      isCurrency: false,
+      info: []
     }
   },
 
@@ -51,11 +48,20 @@ export default {
     }
   },
 
+  created () {
+    const objList = this.getObjects()
+    const loaded = objList !== null
+    const type = (objList.length === 0 || objList[0].id === 1)
+    this.loaded = loaded
+    this.isCurrency = type
+    this.info = objList
+  },
+
   methods: {
 
     getObjects () {
-      const tmp = this.$store.state.selection === 'currency'
-      return (tmp) ? this.$store.state.currency : this.$store.state.items
+      const tmp = this.$store.getters.selection === 'currency'
+      return (tmp) ? this.$store.getters.currency : this.$store.getters.items
     },
 
     changearino (id, value) {

@@ -1,5 +1,11 @@
 <template>
-  <v-app-bar justify-center dense class="wtf">
+  <v-app-bar
+    :clipped-left="true"
+    justify-center
+    dense
+    class="wtf"
+    app
+  >
     <v-app-bar-nav-icon @click.stop="hideDrawer" />
     <v-toolbar-title>
       Welcome to this mess

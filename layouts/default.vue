@@ -1,11 +1,8 @@
 <template>
   <v-app id="pray">
     <v-content>
-      <NavHeader @hideDrawer="changeCenas($event)" />
       <NavBar :drawer-info="drawerInfo" />
-      <div>
-        werwerwer
-      </div>
+      <NavHeader @hideDrawer="changeCenas($event)" />
       <nuxt />
     </v-content>
   </v-app>
@@ -70,7 +67,7 @@ export default {
       drawerInfo: {
         model: null,
         clipped: true,
-        floating: true,
+        floating: false,
         temporary: false
       }
     }
