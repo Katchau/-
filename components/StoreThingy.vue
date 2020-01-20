@@ -10,7 +10,7 @@
             {{ ratio.name }}s
           </span>
           <span v-else>
-            Chaos Orbs
+            <Dropdown :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino2 ($event)" />
           </span>
           <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
             Change to this currency
@@ -34,7 +34,8 @@ export default {
       loaded: false,
       ratio: null,
       isCurrency: false,
-      info: []
+      info: [],
+      fds: null
     }
   },
 
@@ -55,6 +56,11 @@ export default {
     this.isCurrency = type
     this.info = objList
     this.ratio = this.$store.getters.ratio
+    this.fds = [{
+      name: 'wtf',
+      value: 1,
+      picture: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png'
+    }]
   },
 
   methods: {
@@ -67,13 +73,17 @@ export default {
     changearino (obj) {
       this.$store.dispatch('setRatio', obj)
       this.ratio = this.$store.getters.ratio
-      // console.log(this.$store.getters.ratio)
     },
 
     searchItem (item) {
       if (!this.isCurrency) {
         this.$emit('setSelectedItem', item)
       }
+    },
+
+    changearino2 (value) {
+      const currObj = this.fds.find(obj => obj.value === value)
+      this.changearino(currObj)
     }
 
   }
