@@ -73,11 +73,6 @@ export default {
       if (!this.isCurrency) {
         this.$emit('setSelectedItem', item)
       }
-    },
-
-    changearino2 (value) {
-      const currObj = this.fds.find(obj => obj.value === value)
-      this.changearino(currObj)
     }
 
   }
