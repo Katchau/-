@@ -18,6 +18,17 @@
           </v-btn>
         </li>
       </ul>
+<!--      <div>-->
+<!--        <v-simple-table>-->
+<!--          <template v-slot:default>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--              <th class="text-left">Username</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--          </template>-->
+<!--        </v-simple-table>-->
+<!--      </div>-->
     </div>
     <div v-else>
       {{ throwError }}

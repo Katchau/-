@@ -75,9 +75,9 @@ export default {
   },
 
   created () {
-    const tmp = itemTypes.getItemTypes().map((obj) => {
+    const tmp = itemTypes.getItemTypes().map((obj, index) => {
       obj.value = `/poeItems/${obj.value}`
-      obj.picture = `/../images/sidebar/1${obj.picture}`
+      obj.picture = `/../images/sidebar/${index}${obj.picture}`
       return obj
     })
     this.listData.push({
@@ -159,8 +159,9 @@ export default {
   linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
   linear-gradient(335deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
   linear-gradient(25deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px);
+  transition: opacity 0.5s;
 }
 .bottom-gradient:hover {
-  background: none;
+  opacity: 0;
 }
 </style>
