@@ -39,14 +39,15 @@
         <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)" class="cancer">
           <!--        <v-list-item-avatar>-->
           <v-img :src="item.picture" v-bind:alt="item.name" contain>
-            <div class="fill-height bottom-gradient" />
-            <!--        </v-list-item-avatar>-->
-            <v-list-item-content class="v-list-item">
-              <v-list-item-title class="v-list-item">
-                {{ item.name }}
-              </v-list-item-title>
-              <!--              <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>-->
-            </v-list-item-content>
+            <div class="fill-height bottom-gradient">
+              <!--        </v-list-item-avatar>-->
+              <v-list-item-content class="v-list-item">
+                <v-list-item-title class="v-list-item">
+                  {{ item.name }}
+                </v-list-item-title>
+                <!--              <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>-->
+              </v-list-item-content>
+            </div>
           </v-img>
         </v-list-item>
       </v-list-group>
