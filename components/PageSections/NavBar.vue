@@ -30,17 +30,26 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)">
-        <!--        <v-list-item-avatar>-->
-        <v-img :src="item.picture" v-bind:alt="item.name" contain>
-          <!--        </v-list-item-avatar>-->
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-            <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-img>
-      </v-list-item>
+      <v-list-group value="true" class="bananas" p-0 m-0>
+        <template v-slot:activator>
+          <v-list-item-title>
+            Path of Exile
+          </v-list-item-title>
+        </template>
+        <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)" class="cancer">
+          <!--        <v-list-item-avatar>-->
+          <v-img :src="item.picture" v-bind:alt="item.name" contain>
+            <!--        </v-list-item-avatar>-->
+            <div class="fill-height bottom-gradient" />
+            <v-list-item-content class="v-list-item">
+              <v-list-item-title class="v-list-item">
+                {{ item.name }}
+              </v-list-item-title>
+              <!--              <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>-->
+            </v-list-item-content>
+          </v-img>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -141,5 +150,16 @@ export default {
 </script>
 
 <style scoped>
-
+.cancer{
+  padding: 0 !important;
+}
+.bottom-gradient {
+  background-image: linear-gradient(217deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
+  linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
+  linear-gradient(335deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
+  linear-gradient(25deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px);
+}
+.bottom-gradient:hover {
+  background: none;
+}
 </style>
