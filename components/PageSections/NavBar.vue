@@ -31,14 +31,15 @@
       </v-list-item>
 
       <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)">
-        <v-list-item-avatar>
-          <img :src="item.picture" v-bind:alt="item.name">
-        </v-list-item-avatar>
+        <!--        <v-list-item-avatar>-->
+        <v-img :src="item.picture" v-bind:alt="item.name" contain>
+          <!--        </v-list-item-avatar>-->
 
-        <v-list-item-content>
-          <v-list-item-title>{{ item.name }}</v-list-item-title>
-          <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>
-        </v-list-item-content>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
+            <v-list-item-subtitle>should I had more stuff here ?</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-img>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -66,7 +67,7 @@ export default {
   created () {
     const tmp = itemTypes.getItemTypes().map((obj) => {
       obj.value = `/poeItems/${obj.value}`
-      obj.picture = `/../images/sidebar/${obj.picture}`
+      obj.picture = `/../images/sidebar/1${obj.picture}`
       return obj
     })
     this.listData.push({
@@ -131,9 +132,8 @@ export default {
       if (path === undefined || path === '') {
         return
       }
-      this.$router.go({
-        path,
-        force: true
+      this.$router.push({
+        path
       })
     }
   }
