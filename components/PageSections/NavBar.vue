@@ -10,7 +10,10 @@
     <v-list>
       <v-list-item>
         <v-list-item-avatar>
-          <img src="https://thumbs.gfycat.com/FickleTerribleCockroach.webp" alt="dragonite gif">
+          <img
+            src="https://thumbs.gfycat.com/FickleTerribleCockroach.webp"
+            alt="dragonite gif"
+          >
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -21,7 +24,10 @@
 
       <v-list-item>
         <v-list-item-avatar>
-          <img src="https://thumbs.gfycat.com/ElaborateOldCygnet.webp" alt="bulbasaur gif">
+          <img
+            src="https://thumbs.gfycat.com/ElaborateOldCygnet.webp"
+            alt="bulbasaur gif"
+          >
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -36,7 +42,12 @@
             Path of Exile
           </v-list-item-title>
         </template>
-        <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)" class="cancer">
+        <v-list-item
+          v-for="(item, i) in listData"
+          :key="i"
+          v-on:click="changePage(item.value)"
+          class="cancer"
+        >
           <!--        <v-list-item-avatar>-->
           <v-img :src="item.picture" v-bind:alt="item.name" contain>
             <div class="fill-height bottom-gradient">
@@ -113,7 +124,9 @@ export default {
               parent: null
             })
           } else {
-            const parents = path.split('/').filter((str) => { return str.length !== 0 })
+            const parents = path.split('/').filter((str) => {
+              return str.length !== 0
+            })
 
             if (parents.length === 1) {
               tmp.push({
@@ -123,7 +136,10 @@ export default {
               })
             } else {
               tmp.forEach((parent) => {
-                if (parent.depth === (parents.length - 1) && parents[parents.length - 2] === parent.name) {
+                if (
+                  parent.depth === parents.length - 1 &&
+                  parents[parents.length - 2] === parent.name
+                ) {
                   tmp.push({
                     name: parents[parents.length - 1],
                     depth: parent.depth + 1,
@@ -151,14 +167,18 @@ export default {
 </script>
 
 <style scoped>
-.cancer{
+.cancer {
   padding: 0 !important;
 }
 .bottom-gradient {
-  background-image: linear-gradient(217deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
-  linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
-  linear-gradient(335deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
-  linear-gradient(25deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px);
+  background-image: linear-gradient(
+      217deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      transparent 69px
+    ),
+    linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
+    linear-gradient(335deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
+    linear-gradient(25deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px);
   transition: opacity 0.5s;
 }
 .bottom-gradient:hover {

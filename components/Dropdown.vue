@@ -22,7 +22,13 @@
       </v-flex>
     </template>
     <template slot="item" slot-scope="data">
-      <v-img v-if="isImageType" :src="data.item.picture" :max-height="50" :max-width="50" alt="" />
+      <v-img
+        v-if="isImageType"
+        :src="data.item.picture"
+        :max-height="50"
+        :max-width="50"
+        alt=""
+      />
       <v-list-item-title v-html="data.item.name" />
     </template>
   </v-select>
@@ -55,7 +61,6 @@ export default {
   },
 
   methods: {
-
     setObjData () {
       this.obj = this.objData
     },
@@ -67,11 +72,8 @@ export default {
     getImgURL (url) {
       return `background-img:url(${url})`
     }
-
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
