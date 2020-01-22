@@ -7,16 +7,16 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="title">
+                <th v-bind:class="textType">
                   Icon
                 </th>
-                <th class="title">
+                <th v-bind:class="textType">
                   Currency Name
                 </th>
-                <th class="title">
+                <th v-bind:class="textType">
                   Value
                 </th>
-                <th class="title text-center">
+                <th v-bind:class="textType + ` text-center`">
                   Selected Currency
                 </th>
               </tr>
@@ -71,14 +71,23 @@ export default {
       return this.$nuxt.error({ statusCode: 619, message: 'PoE API data is unavailable right now' })
     },
     autismoElevado () {
-      console.log(this.$vuetify.breakpoint.name)
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 'smallautism'
         case 'sm': return 'smallautism'
-        case 'md': return 'smallautism'
-        case 'lg': return 'smallautism'
-        case 'xl': return 'smallautism'
-        default: return 'smallautism'
+        case 'md': return 'autism'
+        case 'lg': return 'autism'
+        case 'xl': return 'autism'
+        default: return 'autism'
+      }
+    },
+    textType () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return ''
+        case 'sm': return ''
+        case 'md': return 'title'
+        case 'lg': return 'title'
+        case 'xl': return 'title'
+        default: return 'title'
       }
     }
   },
