@@ -1,22 +1,22 @@
 <template>
-  <div class="autism">
+  <div v-bind:class="autismoElevado">
     <div v-if="loaded">
-      <Dropdown v-if="!isCurrency" :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino ($event)" />
+      <!--      <Dropdown v-if="!isCurrency" :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino ($event)" />-->
       <div>
         <v-simple-table class="shopthingy">
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">
+                <th class="title">
                   Icon
                 </th>
-                <th class="text-left">
+                <th class="title">
                   Currency Name
                 </th>
-                <th class="text-left">
+                <th class="title">
                   Value
                 </th>
-                <th class="text-left">
+                <th class="title text-center">
                   Selected Currency
                 </th>
               </tr>
@@ -24,16 +24,16 @@
             <tbody>
               <tr v-for="(item) in info">
                 <td><img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id"></td>
-                <td class="text-left">
+                <td>
                   {{ item.displayName || item.name }}
                 </td>
-                <td class="text-left">
+                <td>
                   {{ (item.value / ratio.value).toFixed(5) }}
                 </td>
-                <td v-if="isCurrency">
+                <td v-if="isCurrency" class="text-center">
                   {{ ratio.name }}s
                 </td>
-                <td v-else>
+                <td v-else class="text-center">
                   <img v-bind:src="ratio.picture" v-bind:alt="ratio.id">
                 </td>
                 <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
@@ -69,6 +69,17 @@ export default {
   computed: {
     throwError () {
       return this.$nuxt.error({ statusCode: 619, message: 'PoE API data is unavailable right now' })
+    },
+    autismoElevado () {
+      console.log(this.$vuetify.breakpoint.name)
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 'smallautism'
+        case 'sm': return 'smallautism'
+        case 'md': return 'smallautism'
+        case 'lg': return 'smallautism'
+        case 'xl': return 'smallautism'
+        default: return 'smallautism'
+      }
     }
   },
 
@@ -112,7 +123,8 @@ export default {
 
 <style scoped>
   .shopthingy{
-    list-style: none;
+    padding: 0 20px;
+    margin: 1% auto;
   }
   .v-btn{
     text-transform: lowercase;

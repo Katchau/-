@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="center">
-      <img v-bind:src="img" alt="error image" />
+      <img v-bind:src="img" alt="error image">
       <h1 class="text-center font-weight-bold display-3">
         Oh boy, you done goofed
       </h1>
