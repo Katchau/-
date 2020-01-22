@@ -8,37 +8,19 @@
     overflow
   >
     <v-list>
-      <v-list-item>
-        <v-list-item-avatar>
-          <img src="https://thumbs.gfycat.com/FickleTerribleCockroach.webp" alt="dragonite gif">
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Testing this stuff</v-list-item-title>
-          <v-list-item-subtitle>stuff</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-list-item>
-        <v-list-item-avatar>
-          <img src="https://thumbs.gfycat.com/ElaborateOldCygnet.webp" alt="bulbasaur gif">
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Hmmmmmmmm</v-list-item-title>
-          <v-list-item-subtitle>stuff</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
       <v-list-group value="true" class="bananas" p-0 m-0>
         <template v-slot:activator>
-          <v-list-item-title>
-            Path of Exile
-          </v-list-item-title>
+          <v-img src="/../images/sidebar/poe.jpg" class="navImage cancer2">
+            <div class="fill-height bottom-gradient">
+              <v-list-item-title>
+                Path of Exile
+              </v-list-item-title>
+            </div>
+          </v-img>
         </template>
         <v-list-item v-for="(item, i) in listData" :key="i" v-on:click="changePage(item.value)" class="cancer">
           <!--        <v-list-item-avatar>-->
-          <v-img :src="item.picture" v-bind:alt="item.name" contain>
+          <v-img :src="item.picture" v-bind:alt="item.name" class="navImage">
             <div class="fill-height bottom-gradient">
               <!--        </v-list-item-avatar>-->
               <v-list-item-content class="v-list-item">
@@ -83,7 +65,7 @@ export default {
     this.listData.push({
       name: 'PoE Currency Calculator',
       value: '/poe',
-      picture: ''
+      picture: `/../images/sidebar/pokedex.jpeg`
     })
     this.listData.push(...tmp)
   },
@@ -151,9 +133,13 @@ export default {
 </script>
 
 <style scoped>
+.cancer2{
+  /*margin: -16px !important;*/
+}
 .cancer{
   padding: 0 !important;
 }
+
 .bottom-gradient {
   background-image: linear-gradient(217deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
   linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
@@ -163,5 +149,8 @@ export default {
 }
 .bottom-gradient:hover {
   opacity: 0;
+}
+.navImage{
+  max-height: 105px;
 }
 </style>
