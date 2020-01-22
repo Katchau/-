@@ -2,33 +2,48 @@
   <div class="autism">
     <div v-if="loaded">
       <Dropdown v-if="!isCurrency" :obj-data="fds" :is-image-type="true" @setSelectedOption="changearino ($event)" />
-      <ul class="shopthingy">
-        <li v-for="(item) in info">
-          <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
-          {{ item.displayName || item.name }}
-          {{ (item.value / ratio.value).toFixed(5) }}
-          <span v-if="isCurrency">
-            {{ ratio.name }}s
-          </span>
-          <span v-else>
-            <img v-bind:src="ratio.picture" v-bind:alt="ratio.id">
-          </span>
-          <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
-            Change to this currency
-          </v-btn>
-        </li>
-      </ul>
-<!--      <div>-->
-<!--        <v-simple-table>-->
-<!--          <template v-slot:default>-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--              <th class="text-left">Username</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--          </template>-->
-<!--        </v-simple-table>-->
-<!--      </div>-->
+      <div>
+        <v-simple-table class="shopthingy">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">
+                  Icon
+                </th>
+                <th class="text-left">
+                  Currency Name
+                </th>
+                <th class="text-left">
+                  Value
+                </th>
+                <th class="text-left">
+                  Selected Currency
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item) in info">
+                <td><img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id"></td>
+                <td class="text-left">
+                  {{ item.displayName || item.name }}
+                </td>
+                <td class="text-left">
+                  {{ (item.value / ratio.value).toFixed(5) }}
+                </td>
+                <td v-if="isCurrency">
+                  {{ ratio.name }}s
+                </td>
+                <td v-else>
+                  <img v-bind:src="ratio.picture" v-bind:alt="ratio.id">
+                </td>
+                <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
+                  Change to this currency
+                </v-btn>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </div>
     </div>
     <div v-else>
       {{ throwError }}
@@ -98,7 +113,6 @@ export default {
 <style scoped>
   .shopthingy{
     list-style: none;
-    display: table;
   }
   .v-btn{
     text-transform: lowercase;

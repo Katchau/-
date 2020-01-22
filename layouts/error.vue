@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <h1>
-      Oh boy, you done goofed boy
-    </h1>
+  <div class="container">
     <div class="center">
-      <h1 v-if="error.statusCode === 404">
+      <img v-bind:src="img" alt="error image" />
+      <h1 class="text-center font-weight-bold display-3">
+        Oh boy, you done goofed
+      </h1>
+      <h2 v-if="error.statusCode === 404" class="text-center text-capitalize font-italic">
         You a sneaky little bastard aren't ya. Go back to the homepage and stop sniffing
-      </h1>
-      <h1 v-else>
+      </h2>
+      <h2 v-else class="text-center text-capitalize font-italic">
         {{ error.message }}
-      </h1>
+      </h2>
     </div>
   </div>
 </template>
@@ -23,10 +24,23 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  data () {
+    return {
+      img: '/../images/oops.gif'
+    }
   }
 }
 </script>
 
 <style scoped>
-
+  .container {
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 </style>
