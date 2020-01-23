@@ -22,7 +22,6 @@
 </template>
 
 <script>
-// const url = require('url') new url.URL('this.$route.params.query')
 
 export default {
   name: 'Query',

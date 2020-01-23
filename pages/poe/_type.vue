@@ -1,7 +1,6 @@
 <template>
   <div>
     <StoreThingy @setSelectedItem="searchTradeItem ($event)" />
-    <nuxt-child />
   </div>
 </template>
 
@@ -42,7 +41,7 @@ export default {
       }
       this.search = true
       // this.$router.push({
-      //   path: `/poeItems/currentMarket/${obj.name}&${obj.baseType}`
+      //   path: `/poe/currentMarket/${obj.name}&${obj.baseType}`
       // })
     }
 

@@ -81,7 +81,7 @@ export default {
 
   created () {
     const tmp = itemTypes.getItemTypes().map((obj, index) => {
-      obj.value = `/poeItems/${obj.value}`
+      obj.value = `/poe/${obj.value}`
       obj.picture = `/../images/sidebar/${index}${obj.picture}`
       return obj
     })
