@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StoreThingy @setSelectedItem="searchTradeItem ($event)" />
+    <StoreThingy :page-title="type" @setSelectedItem="searchTradeItem ($event)" />
   </div>
 </template>
 

@@ -56,6 +56,14 @@ export default {
   name: 'StoreThingy',
   // middleware: 'poeCurr',
 
+  props: {
+    pageTitle: {
+      type: String,
+      required: false,
+      default: 'Currency Calculator'
+    }
+  },
+
   data () {
     return {
       loaded: false,
@@ -88,6 +96,24 @@ export default {
         case 'lg': return 'title'
         case 'xl': return 'title'
         default: return 'title'
+      }
+    }
+  },
+
+  // this is bad but it works. this is because the created method isnt being called when navigating between the same dynamic nest
+  watch: {
+    pageTitle (oldValue, newValue) {
+      if (!this.isCurrency && this.pageTitle !== 'Currency Calculator') {
+        if (oldValue !== 'Currency Calculator') {
+          const objList = this.getObjects()
+          const loaded = objList !== null
+          const type = (objList.length === 0 || objList[0].id === 1)
+          this.loaded = loaded
+          this.isCurrency = type
+          this.info = objList
+          this.ratio = this.$store.getters.ratio
+          this.fds = this.$store.getters.currency
+        }
       }
     }
   },
