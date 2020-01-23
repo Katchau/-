@@ -62,16 +62,18 @@ import NavHeader from '../components/PageSections/NavHeader'
 import NavBar from '../components/PageSections/NavBar'
 export default {
   components: { NavBar, NavHeader },
+
   data () {
     return {
       drawerInfo: {
         model: null,
         clipped: true,
-        floating: false,
+        floating: true,
         temporary: false
       }
     }
   },
+
   methods: {
     changeCenas () {
       this.drawerInfo.model = !this.drawerInfo.model

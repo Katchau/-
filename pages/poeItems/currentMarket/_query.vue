@@ -61,12 +61,15 @@ export default {
 </script>
 
 <style scoped>
+  .autism {
+    margin: 2% auto;
+    display: table;
+  }
   .autism h1 {
     margin: auto;
   }
   .shopthingy{
     list-style: none;
-    display: table;
   }
   .copyCoiso{
     width: 100%;

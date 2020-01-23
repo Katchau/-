@@ -6,6 +6,7 @@
     :temporary="drawerInfo.temporary"
     app
     overflow
+    class="navBar"
   >
     <v-list>
       <v-list-item v-on:click="changePage('/')" class="cancer">
@@ -158,7 +159,10 @@ export default {
 .cancer{
   padding: 0 !important;
 }
-
+.navBar{
+  list-style: none;
+  overflow: hidden;
+}
 .bottom-gradient {
   background-image: linear-gradient(217deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
   linear-gradient(127deg, rgba(0, 0, 0, 0.2) 0%, transparent 69px),
