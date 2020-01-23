@@ -1,5 +1,5 @@
 <template>
-  <v-img v-bind:src="getBananaURL" contain class="bananImage" />
+  <v-img v-bind:src="getBananaURL" max-height="420px" contain/>
 </template>
 
 <script>
@@ -23,7 +23,4 @@ export default {
 </script>
 
 <style scoped>
-.bananImage{
-  max-height: 420px;
-}
 </style>
