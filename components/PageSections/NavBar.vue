@@ -30,9 +30,9 @@
           </v-img>
         </v-list-item-content>
       </v-list-item>
-      <v-list-group value="true" class="bananas" p-0 m-0>
+      <v-list-group class="bananas" p-0 m-0>
         <template v-slot:activator>
-          <v-img src="/../images/sidebar/letucano2.jpg" class="navImage cancer2">
+          <v-img src="/../images/sidebar/letucano2.jpg" class="navImage2">
             <div class="fill-height bottom-gradient">
               <v-list-item-title>
                 Path of Exile
@@ -155,9 +155,6 @@ export default {
 </script>
 
 <style scoped>
-.cancer2{
-  /*margin: -16px !important;*/
-}
 .cancer{
   padding: 0 !important;
 }

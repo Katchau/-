@@ -19,3 +19,6 @@
   align-items: center;
   text-align: center;
 }
+.v-list-group__header{
+  padding: 0 !important;
+}
