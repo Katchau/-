@@ -1,14 +1,5 @@
 <template>
   <div class="autism">
-    <div>
-      <h1>
-        Será que isto irá funcionar?
-      </h1>
-      <Dropdown :obj-data="tmp" @setSelectedOption="selectOption ($event)" />
-      <v-btn v-on:click="changePage" small>
-        Let's fly awayyyyyyyyyyyyyyy
-      </v-btn>
-    </div>
     <StoreThingy />
   </div>
 </template>

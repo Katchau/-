@@ -8,9 +8,31 @@
     overflow
   >
     <v-list>
+      <v-list-item v-on:click="changePage('/')" class="cancer">
+        <v-list-item-content class="cancer">
+          <v-img src="/../images/sidebar/home1.jpg" class="navImage">
+            <div class="fill-height bottom-gradient">
+              <v-list-item-title>
+                Home Sweet Home
+              </v-list-item-title>
+            </div>
+          </v-img>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item v-on:click="changePage('/bananas')" class="cancer">
+        <v-list-item-content class="cancer">
+          <v-img src="/../images/sidebar/banana1.jpg" class="navImage">
+            <div class="fill-height bottom-gradient">
+              <v-list-item-title>
+                Free Bananas!
+              </v-list-item-title>
+            </div>
+          </v-img>
+        </v-list-item-content>
+      </v-list-item>
       <v-list-group value="true" class="bananas" p-0 m-0>
         <template v-slot:activator>
-          <v-img src="/../images/sidebar/poe.jpg" class="navImage cancer2">
+          <v-img src="/../images/sidebar/letucano2.jpg" class="navImage cancer2">
             <div class="fill-height bottom-gradient">
               <v-list-item-title>
                 Path of Exile
