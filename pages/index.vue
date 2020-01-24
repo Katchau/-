@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container2">
     <div>
       <logo />
       <h1 class="title">
@@ -37,8 +37,8 @@ export default {
 }
 </script>
 
-<style>
-.container {
+<style scoped>
+.container2 {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

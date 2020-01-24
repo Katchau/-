@@ -10,6 +10,8 @@ import Dropdown from '../components/Dropdown'
 export default {
   name: 'Poe',
 
+  transition: 't1',
+
   components: {
     Dropdown
   },

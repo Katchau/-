@@ -4,6 +4,12 @@
 .t1-enter, .t1-leave-to {
   opacity: 0;
 }
+.t2-enter-active, .t2-leave-active {
+  transition: opacity 0.5s;
+}
+.t2-enter, .t2-leave-to {
+  opacity: 0;
+}
 .autism {
   margin: 2% auto;
   display: block;
@@ -25,4 +31,8 @@
 .v-navigation-drawer__content{
   list-style: none;
   overflow: hidden;
+}
+.nolose {
+  margin: 5% 15% !important;
+  display: block ;
 }
