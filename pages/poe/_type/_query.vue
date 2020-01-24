@@ -1,6 +1,12 @@
 <template>
   <v-dialog v-model="dialog" class="nolose" content-class="nolose">
     <v-card>
+      <v-alert v-if="success" type="success" class="stickMe">
+        {{ displayMsg }}
+      </v-alert>
+      <v-alert v-else-if="success !== null" type="error">
+        {{ displayMsg }}
+      </v-alert>
       <v-list class="shopthingy center">
         <v-list-item-title class="titulo display-2 font-weight-medium">
           {{ title }}
@@ -12,10 +18,12 @@
             </div>
             <div>
               {{ re.itemDetails.name }}
-              {{ (re.price.amount).toFixed(2) }}
-              <span>
-                {{ re.price.currency }}
-              </span>
+              <p v-if="re.price !== null">
+                {{ (re.price.amount).toFixed(2) }}
+                <span>
+                  {{ re.price.currency }}
+                </span>
+              </p>
             </div>
             <v-btn v-on:click="copyMessage(re.whisperMsg, i)" small rounded>
               Copy Whisper message to clipboard
@@ -37,7 +45,9 @@ export default {
 
   data () {
     return {
-      dialog: false
+      dialog: false,
+      displayMsg: '',
+      success: null
     }
   },
 
@@ -80,10 +90,11 @@ export default {
         elCopy.setAttribute('type', 'text')
         elCopy.select()
         try {
-          const success = document.execCommand('copy')
-          alert(success ? 'Copied to the clipboard!' : 'Couldnt Copy message :(')
+          this.success = document.execCommand('copy')
+          this.displayMsg = this.success ? 'Copied to the clipboard!' : 'Couldnt Copy message :('
         } catch (err) {
-          alert('Oh no, error copying message')
+          this.success = false
+          this.displayMsg = 'Oh no, error copying message'
         }
         elCopy.setAttribute('type', 'hidden')
         window.getSelection().removeAllRanges()
@@ -110,5 +121,8 @@ export default {
     text-align: center;
     margin: 0 auto;
     padding-bottom: 2%;
+  }
+  .stickMe{
+    position: sticky !important;
   }
 </style>
