@@ -1,6 +1,6 @@
 <template>
-  <div class="autism">
-    <div>
+  <v-div>
+    <div class="nolose">
       <ul class="shopthingy">
         <h1>
           {{ title }}
@@ -18,7 +18,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </v-div>
 </template>
 
 <script>
@@ -60,11 +60,11 @@ export default {
 </script>
 
 <style scoped>
-  .autism {
+  .nolose {
     margin: 2% auto;
     display: table;
   }
-  .autism h1 {
+  .nolose h1 {
     margin: auto;
   }
   .shopthingy{

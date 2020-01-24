@@ -23,7 +23,9 @@
             </thead>
             <tbody>
               <tr v-for="(item) in info">
-                <td><img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id"></td>
+                <td>
+                  <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
+                </td>
                 <td>
                   {{ item.displayName || item.name }}
                 </td>
@@ -36,9 +38,6 @@
                 <td v-else class="text-center">
                   <img v-bind:src="ratio.picture" v-bind:alt="ratio.id">
                 </td>
-                <v-btn v-if="isCurrency" v-on:click="changearino(item)" rounded>
-                  Change to this currency
-                </v-btn>
               </tr>
             </tbody>
           </template>
