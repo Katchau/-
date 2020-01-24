@@ -1,31 +1,33 @@
 <template>
-  <v-select
-    @input="selectOption"
-    :items="obj"
-    :readonly="false"
-    :return-object="true"
-    v-model="answer"
-    class="dropdownCenas"
-    item-text="name"
-    item-value="value"
-    label="Choose on of the following"
-    name="option selection"
+  <v-menu
+    :close-on-content-click="true"
+    absolute
   >
-    <template slot="selection" slot-scope="data">
-      <v-flex v-if="isImageType" xs2>
-        <v-avatar size="25px">
-          <img v-if="isImageType" :src="data.item.picture" alt="">
-        </v-avatar>
-      </v-flex>
-      <v-flex class="ml-1">
-        {{ data.item.name }}
-      </v-flex>
+    <template v-slot:activator="{ on }">
+      <v-btn
+        :fixed="true"
+        v-on="on"
+        fab
+        color="#ff4081"
+        bottom
+        right
+        class="currBtn"
+      >
+        <v-icon x-large>
+          mdi-swap-horizontal-circle
+        </v-icon>
+      </v-btn>
     </template>
-    <template slot="item" slot-scope="data">
-      <v-img v-if="isImageType" :src="data.item.picture" :max-height="50" :max-width="50" alt="" />
-      <v-list-item-title v-html="data.item.name" />
-    </template>
-  </v-select>
+
+    <v-card style="max-height: 420px">
+      <v-list>
+        <v-list-item v-for="(data, i) in objData" :key="i" v-on:click="selectOption(data)">
+          <v-img v-if="isImageType" :src="data.picture" :max-height="50" :max-width="50" alt="" />
+          <v-list-item-title v-html="data.name" />
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </v-menu>
 </template>
 
 <script>
@@ -60,12 +62,8 @@ export default {
       this.obj = this.objData
     },
 
-    selectOption () {
-      this.$emit('setSelectedOption', this.answer)
-    },
-
-    getImgURL (url) {
-      return `background-img:url(${url})`
+    selectOption (data) {
+      this.$emit('setSelectedOption', data)
     }
 
   }
@@ -73,5 +71,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .currBtn{
+    color: white
+  }
 </style>

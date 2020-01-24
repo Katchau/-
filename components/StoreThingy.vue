@@ -105,6 +105,7 @@ export default {
     pageTitle (oldValue, newValue) {
       if (!this.isCurrency && this.pageTitle !== 'Currency Calculator') {
         if (oldValue !== 'Currency Calculator') {
+          // yes this is the created method
           const objList = this.getObjects()
           const loaded = objList !== null
           const type = (objList.length === 0 || objList[0].id === 1)
