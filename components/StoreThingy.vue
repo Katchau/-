@@ -116,6 +116,9 @@ export default {
           this.fds = this.$store.getters.currency
         }
       }
+    },
+    '$store.getters.ratio' () {
+      this.ratio = this.$store.getters.ratio
     }
   },
 
