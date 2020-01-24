@@ -24,7 +24,7 @@
             <tbody>
               <tr v-for="(item) in info">
                 <td>
-                  <img v-bind:src="item.picture" v-on:click.stop="searchItem (item)" v-bind:alt="item.id">
+                  <img v-bind:src="item.picture" v-on:click="searchItem (item)" v-bind:alt="item.id">
                 </td>
                 <td>
                   {{ item.displayName || item.name }}

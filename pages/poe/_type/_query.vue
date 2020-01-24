@@ -17,11 +17,11 @@
                 {{ re.price.currency }}
               </span>
             </div>
-            <v-btn :click="copyMessage(re.whisperMsg, i)" small rounded>
+            <v-btn v-on:click="copyMessage(re.whisperMsg, i)" small rounded>
               Copy Whisper message to clipboard
             </v-btn>
           </div>
-          <textarea v-bind:id="'item_' + i" v-model="re.whisperMsg" class="copyCoiso" hidden disabled />
+          <input v-bind:id="'item_' + i" v-bind:value="re.whisperMsg" class="copyCoiso" type="hidden">
         </v-list-item>
       </v-list>
     </v-card>
@@ -75,17 +75,19 @@ export default {
 
   methods: {
     copyMessage (message, index) {
-    //   if (document !== undefined) {
-    //     const elCopy = document.querySelector(`#item_${index}`)
-    //     elCopy.setAttribute('type', 'text')
-    //     elCopy.select()
-    //     try {
-    //       const success = document.execCommand('copy')
-    //       alert(success ? 'Copied to the clipboard!' : 'Couldnt Copy message :(')
-    //     } catch (err) {
-    //       alert('Oh no, error copying message')
-    //     }
-    //   }
+      if (document !== undefined) {
+        const elCopy = document.querySelector(`#item_${index}`)
+        elCopy.setAttribute('type', 'text')
+        elCopy.select()
+        try {
+          const success = document.execCommand('copy')
+          alert(success ? 'Copied to the clipboard!' : 'Couldnt Copy message :(')
+        } catch (err) {
+          alert('Oh no, error copying message')
+        }
+        elCopy.setAttribute('type', 'hidden')
+        window.getSelection().removeAllRanges()
+      }
     }
   }
 }

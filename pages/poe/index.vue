@@ -9,6 +9,8 @@ import StoreThingy from '../../components/StoreThingy'
 export default {
   name: 'Index',
 
+  transition: 't2',
+
   components: {
     StoreThingy
   },

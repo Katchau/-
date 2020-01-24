@@ -11,6 +11,8 @@ import StoreThingy from '../../components/StoreThingy'
 export default {
   name: 'Type',
 
+  transition: 't2',
+
   components: {
     StoreThingy
   },
