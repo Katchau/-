@@ -1,10 +1,10 @@
 <template>
-  <v-div>
-    <div class="nolose">
+  <v-dialog v-model="dialog">
+    <v-card class="nolose">
       <ul class="shopthingy">
-        <h1>
+        <v-card-title>
           {{ title }}
-        </h1>
+        </v-card-title>
         <li v-for="re in results">
           <div>
             <img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name">
@@ -17,14 +17,22 @@
           <textarea v-model="re.whisperMsg" class="copyCoiso" disabled />
         </li>
       </ul>
-    </div>
-  </v-div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
 
 export default {
   name: 'Query',
+
+  transition: 't1',
+
+  data () {
+    return {
+      dialog: false
+    }
+  },
 
   computed: {
     title () {
@@ -49,7 +57,8 @@ export default {
       .then(({ data }) => {
         context.store.dispatch('setSearchResults', data)
         return {
-          results: context.store.getters.searchResults
+          results: context.store.getters.searchResults,
+          dialog: true
         }
       })
       .catch((e) => {

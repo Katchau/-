@@ -1,7 +1,7 @@
 <template>
   <div>
-    <StoreThingy :page-title="type" @setSelectedItem="searchTradeItem ($event)" />
     <nuxt-child />
+    <StoreThingy :page-title="type" @setSelectedItem="searchTradeItem ($event)" />
   </div>
 </template>
 
