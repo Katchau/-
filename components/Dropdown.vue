@@ -8,12 +8,13 @@
         :fixed="true"
         v-on="on"
         fab
-        color="#ff4081"
         bottom
         right
-        class="currBtn"
       >
-        <v-icon x-large>
+        <v-icon v-if="!$vuetify.theme.dark" x-large>
+          mdi-swap-horizontal-circle
+        </v-icon>
+        <v-icon v-else x-large>
           mdi-swap-horizontal-circle
         </v-icon>
       </v-btn>
@@ -72,6 +73,9 @@ export default {
 
 <style scoped>
   .currBtn{
-    color: white
+    color: darkgray;
+  }
+  .currBtn2{
+    color: white;
   }
 </style>

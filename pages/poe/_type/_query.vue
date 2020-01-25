@@ -56,6 +56,14 @@ export default {
       return this.$route.params.query.toString().replace('&', ' ')
     }
   },
+
+  watch: {
+    dialog () {
+      if (!this.dialog) {
+        this.$router.back()
+      }
+    }
+  },
   // data () {
   //   return {
   //     results: this.$store.state.searchResults,
@@ -73,6 +81,7 @@ export default {
     return context.$axios.get(`/searchItem?name=${tmp[0]}&type=${tmp[1]}`)
       .then(({ data }) => {
         context.store.dispatch('setSearchResults', data)
+        context.store.dispatch('setLoadingScreen', false)
         return {
           results: context.store.getters.searchResults,
           dialog: true

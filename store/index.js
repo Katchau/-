@@ -13,7 +13,8 @@ export const state = () => ({
   },
   items: null,
   selection: null,
-  searchResults: null
+  searchResults: null,
+  loadingScreen: false
 })
 
 export const mutations = {
@@ -36,6 +37,10 @@ export const mutations = {
 
   SET_RESULTS (state, results) {
     state.searchResults = results
+  },
+
+  SET_LOADING (state, loading) {
+    state.loadingScreen = loading
   }
 
 }
@@ -120,6 +125,10 @@ export const actions = {
       ret.push(tmp)
     })
     commit('SET_RESULTS', ret)
+  },
+
+  setLoadingScreen ({ commit }, state) {
+    commit('SET_LOADING', state)
   }
 
 }
@@ -144,6 +153,10 @@ export const getters = {
 
   selection (state) {
     return state.selection
+  },
+
+  loadingScreen (state) {
+    return state.loadingScreen
   }
 
 }

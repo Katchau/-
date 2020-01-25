@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LoadingDialog />
     <Dropdown :obj-data="currencyList" :is-image-type="true" @setSelectedOption="changearino($event)" />
     <nuxt-child />
   </div>
@@ -7,12 +8,14 @@
 
 <script>
 import Dropdown from '../components/Dropdown'
+import LoadingDialog from '../components/PageSections/LoadingDialog'
 export default {
   name: 'Poe',
 
   transition: 't1',
 
   components: {
+    LoadingDialog,
     Dropdown
   },
 

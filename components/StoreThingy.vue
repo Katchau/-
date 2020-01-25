@@ -68,15 +68,16 @@ export default {
       loaded: false,
       ratio: null,
       isCurrency: false,
-      info: [],
-      fds: null
+      info: []
     }
   },
 
   computed: {
+
     throwError () {
       return this.$nuxt.error({ statusCode: 619, message: 'PoE API data is unavailable right now' })
     },
+
     autismoElevado () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 'smallautism'
@@ -87,6 +88,7 @@ export default {
         default: return 'autism'
       }
     },
+
     textType () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return ''
@@ -101,6 +103,7 @@ export default {
 
   // this is bad but it works. this is because the created method isnt being called when navigating between the same dynamic nest
   watch: {
+
     pageTitle (oldValue, newValue) {
       if (!this.isCurrency && this.pageTitle !== 'Currency Calculator') {
         if (oldValue !== 'Currency Calculator') {
@@ -112,13 +115,14 @@ export default {
           this.isCurrency = type
           this.info = objList
           this.ratio = this.$store.getters.ratio
-          this.fds = this.$store.getters.currency
         }
       }
     },
+
     '$store.getters.ratio' () {
       this.ratio = this.$store.getters.ratio
     }
+
   },
 
   created () {
@@ -129,7 +133,6 @@ export default {
     this.isCurrency = type
     this.info = objList
     this.ratio = this.$store.getters.ratio
-    this.fds = this.$store.getters.currency
   },
 
   methods: {
@@ -146,6 +149,7 @@ export default {
 
     searchItem (item) {
       if (!this.isCurrency) {
+        this.$store.dispatch('setLoadingScreen', true)
         this.$emit('setSelectedItem', item)
       }
     }
