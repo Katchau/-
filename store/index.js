@@ -59,7 +59,10 @@ export const actions = {
   },
 
   setCurrency (vueContext, currency) {
-    const lines = currency.lines
+    const lines = currency.lines || []
+    if (lines.length === 0) {
+      return
+    }
     const details = currency.currencyDetails
     const ret = []
     ret.push({
@@ -69,13 +72,15 @@ export const actions = {
       picture: details[0].icon
     })
     lines.forEach((obj) => {
-      const tmp = {}
-      tmp.name = obj.currencyTypeName
-      tmp.id = obj.receive.get_currency_id
-      // tmp.value = obj.chaosEquivalent
-      tmp.value = obj.receive.value
-      tmp.picture = details[tmp.id - 1].icon
-      ret.push(tmp)
+      if (obj !== null && obj.receive !== null) {
+        const tmp = {}
+        tmp.name = obj.currencyTypeName
+        tmp.id = obj.receive.get_currency_id
+        // tmp.value = obj.chaosEquivalent
+        tmp.value = obj.receive.value
+        tmp.picture = details[tmp.id - 1].icon
+        ret.push(tmp)
+      }
     })
     vueContext.commit('SET_CURRENCY', ret)
     vueContext.dispatch('setRatio', ret[0])
