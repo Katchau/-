@@ -55,6 +55,17 @@
             </div>
           </v-img>
         </v-list-item>
+        <v-list-item class="cancer">
+          <v-list-item-content class="cancer">
+            <v-img src="/../images/sidebar/hm.jpeg" class="navImage">
+              <div class="fill-height bottom-gradient">
+                <v-list-item-title class="v-list-item">
+                  Item Search
+                </v-list-item-title>
+              </div>
+            </v-img>
+          </v-list-item-content>
+        </v-list-item>
       </v-list-group>
     </v-list>
   </v-navigation-drawer>

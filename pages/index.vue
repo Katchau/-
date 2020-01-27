@@ -6,7 +6,7 @@
         limao
       </h1>
       <h2 class="subtitle">
-        bananas
+        RIP Kobe
       </h2>
       <div class="links">
         <nuxt-link to="/poe" class="button--green">
