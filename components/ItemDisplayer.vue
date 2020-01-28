@@ -1,0 +1,113 @@
+<template>
+  <div :class="checkBackgroundColour">
+    <!--    {{ item.itemDetails.name }}-->
+    <!--    <p v-if="item.price !== null">-->
+    <!--      {{ (item.price.amount).toFixed(2) }}-->
+    <!--      <span>-->
+    <!--        {{ item.price.currency }}-->
+    <!--      </span>-->
+    <!--    </p>-->
+    <div>
+      Item level: {{ item.ilvl }}
+    </div>
+    <div v-if="item.identified" :class="checkCorruption">
+      <div v-if="item.properties">
+        <div v-for="(prop, i) in item.properties" :key="'a' + i">
+          {{ prop.name }}: {{ prop.values[0][0] }}
+        </div>
+      </div>
+      <div v-if="item.sockets !== null">
+        Sockets:
+        <span v-for="(socket, i) in item.sockets" :key="i" :class="colourClass(socket.sColour)">
+          {{ socket.group }}
+        </span>
+      </div>
+      <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i">
+        {{ imp }}
+      </div>
+      <div v-if="item.explicitMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+        {{ exp }}
+      </div>
+      <div v-if="item.enchantMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+        Enchanted: {{ exp }}
+      </div>
+      <div v-if="item.fracturedMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+        Fractured: {{ exp }}
+      </div>
+      <div v-if="item.craftedtMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+        Crafted: {{ exp }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ItemDisplayer',
+
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
+
+  computed: {
+    checkCorruption () {
+      return this.item.corruption ? 'red' : ''
+    },
+
+    checkBackgroundColour () {
+      if (this.item.isRelic !== undefined) {
+        return 'reliquia'
+      }
+      if (this.item.shaper) {
+        return 'violet'
+      }
+      if (this.item.elder) {
+        return 'purple'
+      }
+      if (this.item.influences !== undefined) {
+        const influence = this.item.influences
+        // as of now you cannot have more than 1. inb4 this changes :')
+        // lmao last update made possible having 2. oops, need to make changes here then
+        if (influence.hunter) {
+          return 'green'
+        }
+        if (influence.crusader) {
+          return 'orange'
+        }
+        if (influence.redeemer) {
+          return 'blue'
+        }
+        if (influence.warlord) {
+          return 'yellow'
+        }
+      }
+      return ''
+    }
+
+  },
+
+  methods: {
+    colourClass (colour) {
+      switch (colour) {
+        case 'R': return 'red--text'
+        case 'G': return 'green--text'
+        case 'B': return 'blue--text'
+        case 'A': return 'brown--text'
+        case 'W': return 'yellow--text'
+        default: return 'black--text'
+      }
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+.reliquia{
+  background: rgb(36,36,0);
+  background: linear-gradient(180deg, rgba(36,36,0,1) 0%, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
+}
+</style>

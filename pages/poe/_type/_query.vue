@@ -25,6 +25,7 @@
                 </span>
               </p>
             </div>
+            <ItemDisplayer :item="re.itemDetails" />
             <v-btn v-on:click="copyMessage(re.whisperMsg, i)" small rounded>
               Copy Whisper message to clipboard
             </v-btn>
@@ -38,9 +39,10 @@
 
 <script>
 
+import ItemDisplayer from '../../../components/ItemDisplayer'
 export default {
   name: 'Query',
-
+  components: { ItemDisplayer },
   transition: 't1',
 
   data () {
