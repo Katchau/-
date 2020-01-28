@@ -28,13 +28,13 @@
       <div v-if="item.explicitMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
         {{ exp }}
       </div>
-      <div v-if="item.enchantMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+      <div v-if="item.enchantMods" v-for="(exp, i) in item.enchantMods" :key="'d' + i">
         Enchanted: {{ exp }}
       </div>
-      <div v-if="item.fracturedMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+      <div v-if="item.fracturedMods" v-for="(exp, i) in item.fracturedMods" :key="'e' + i">
         Fractured: {{ exp }}
       </div>
-      <div v-if="item.craftedtMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
+      <div v-if="item.craftedtMods" v-for="(exp, i) in item.craftedtMods" :key="'f' + i">
         Crafted: {{ exp }}
       </div>
     </div>
@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .reliquia{
-  background: rgb(36,36,0);
-  background: linear-gradient(180deg, rgba(36,36,0,1) 0%, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
+  background: rgb(255,248,0);
+  background: linear-gradient(180deg, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
 }
 </style>

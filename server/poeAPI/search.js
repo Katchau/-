@@ -4,6 +4,10 @@ const url = 'https://www.pathofexile.com/api/trade/search/Standard'
 const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
 
+// function filterItemCategoryList () {
+//   return ''.filter((str) => { return str.length !== 0 })
+// }
+
 // TODO update the query settings
 module.exports.searchItem = function (req, res, itemInfo) {
   const searchInfo = {
