@@ -13,7 +13,15 @@
     <div v-if="item.identified" :class="checkCorruption">
       <div v-if="item.properties">
         <div v-for="(prop, i) in item.properties" :key="'a' + i">
-          {{ prop.name }}: {{ prop.values[0][0] }}
+          {{ prop.name }}
+          <span v-if="prop.values[0] !== undefined">
+            <span v-if="prop.values[0][0] !== undefined">
+              {{ prop.values[0][0] }}
+            </span>
+            <span v-else>
+              {{ prop.values[0] }}
+            </span>
+          </span>
         </div>
       </div>
       <div v-if="item.sockets !== null">

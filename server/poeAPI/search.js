@@ -7,36 +7,75 @@ const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // function filterItemCategoryList () {
 //   return ''.filter((str) => { return str.length !== 0 })
 // }
+function updateFilterFunction (currFilter, parameter, paramValue) {
+  if (parameter === 'name' || parameter === 'type') {
+    currFilter.query[parameter] = paramValue.toString()
+  }
+  if (parameter === 'rarity') {
+    currFilter.query.filters.type_filters.disabled = false
+    currFilter.query.filters.type_filters.filters.rarity = paramValue.toString()
+  }
+  if (parameter === 'maptier') {
+    currFilter.query.filters.map_filters.disabled = false
+    currFilter.query.filters.map_filters.filters.map_tier = {
+      min: parseInt(paramValue),
+      max: parseInt(paramValue)
+    }
+  }
+  if (parameter === 'socketlinks') {
+    currFilter.query.filters.socket_filters.disabled = false
+    currFilter.query.filters.socket_filters.filters.links = {
+      min: parseInt(paramValue),
+      max: parseInt(paramValue)
+    }
+  }
+  return currFilter
+}
 
 // TODO update the query settings
-module.exports.searchItem = function (req, res, itemInfo) {
-  const searchInfo = {
+module.exports.searchItem = function (req, res) {
+  let searchInfo = {
     query: {
-      // filters: {
-      //   trade_filters: {
-      //     disabled: false,
-      //     filters: {
-      //       price: {
-      //         min: 1,
-      //         max: 50
-      //       }
-      //     }
-      //   }
-      // },
+      filters: {
+        // yes there could be a way to automatize this but wtv :)
+        type_filters: {
+          disabled: true,
+          filters: {}
+        },
+        map_filters: {
+          disabled: true,
+          filters: {
+            map_tier: {}
+          }
+        },
+        socket_filters: {
+          disabled: true,
+          filters: {}
+        },
+        misc_filters: {
+          disabled: true,
+          filters: {}
+        }
+      },
       status: {
         option: 'online'
       },
       stats: [{
         type: 'and',
         filters: []
-      }],
-      name: itemInfo.name.toString(),
-      type: itemInfo.type.toString()
+      }]
     },
     sort: {
       price: 'asc'
     }
   }
+
+  // idk what i am doing
+  const options = decodeURIComponent(req.url).split('?')[1].split('&')
+  options.forEach((option) => {
+    const tmp = option.split('=')
+    searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
+  })
 
   const authOptions = {
     url: url.toString(),

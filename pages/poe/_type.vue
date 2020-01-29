@@ -41,7 +41,7 @@ export default {
     getItemStringParams (item) {
       let ret = ''
       if (item.isRelic) {
-        ret += '&relic=true'
+        ret += '&rarity=uniquefoil'
       }
       if (item.mapTier > 0) {
         ret += `&maptier=${item.mapTier}`

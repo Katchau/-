@@ -53,9 +53,5 @@ app.get('/getItems', function (req, res) {
 })
 
 app.get('/searchItem', function (req, res) {
-  const itemInfo = {
-    name: req.query.name,
-    type: req.query.type
-  }
-  require('./poeAPI/search').searchItem(req, res, itemInfo)
+  require('./poeAPI/search').searchItem(req, res)
 })

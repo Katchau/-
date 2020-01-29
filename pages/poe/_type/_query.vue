@@ -55,7 +55,7 @@ export default {
 
   computed: {
     title () {
-      return this.$route.params.query.toString().replace('&', ' ')
+      return this.$route.params.query.toString().replace(/&.*=.*/, '').replace('&', ' ')
     }
   },
 
@@ -80,7 +80,15 @@ export default {
     //   console.log('olup') resolve para o codigo que queres lancar seguigo de then e catch
     // })
     const tmp = context.route.params.query.toString().split('&')
-    return context.$axios.get(`/searchItem?name=${tmp[0]}&type=${tmp[1]}`)
+    let queryString = `/searchItem?name=${tmp[0]}`
+    for (let i = 1; i < tmp.length; i++) {
+      if (i === 1 && !tmp[1].includes('=')) {
+        queryString += `&type=${tmp[i]}`
+      } else {
+        queryString += `&${tmp[i]}`
+      }
+    }
+    return context.$axios.get(queryString)
       .then(({ data }) => {
         context.store.dispatch('setSearchResults', data)
         context.store.dispatch('setLoadingScreen', false)
