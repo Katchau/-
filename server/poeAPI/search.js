@@ -70,13 +70,15 @@ module.exports.searchItem = function (req, res) {
     }
   }
 
-  // idk what i am doing
-  const options = decodeURIComponent(req.url).split('?')[1].split('&')
+  let params = decodeURIComponent(req.url).split('?')[1]
+  if (!params.includes('type=')) {
+    params = params.replace('name=', 'type=')
+  }
+  const options = params.split('&')
   options.forEach((option) => {
     const tmp = option.split('=')
     searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
   })
-
   const authOptions = {
     url: url.toString(),
     body: searchInfo,

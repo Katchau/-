@@ -30,6 +30,7 @@
           {{ socket.group }}
         </span>
       </div>
+      <!--      todo melhorar isto aqui-->
       <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i">
         {{ imp }}
       </div>
@@ -64,7 +65,7 @@ export default {
     checkCorruption () {
       return this.item.corruption ? 'red' : ''
     },
-
+    // todo melhorar isto aqui, por imagens em vez desta porra
     checkBackgroundColour () {
       if (this.item.isRelic !== undefined) {
         return 'reliquia'

@@ -43,7 +43,8 @@ export default {
       if (item.isRelic) {
         ret += '&rarity=uniquefoil'
       }
-      if (item.mapTier > 0) {
+      // yes, the api is retarded enough to give map tiers to things that aren't maps
+      if (item.mapTier > 0 && !item.isEssence) {
         ret += `&maptier=${item.mapTier}`
       }
       if (item.variant !== null) {
@@ -63,6 +64,10 @@ export default {
       let queryString = `/poe/${this.type}/${obj.name}`
       if (obj.baseType !== null && !obj.name.includes(obj.baseType)) {
         queryString += `&${obj.baseType}`
+      }
+      // more black magics
+      if (this.type === 'prophecy') {
+        queryString += `&Prophecy`
       }
       this.$router.push({
         path: queryString + this.getItemStringParams(obj.usefulInfo)
