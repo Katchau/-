@@ -107,7 +107,9 @@ export const actions = {
       tmp.name = obj.name
       // todo fix this cancer down with the displayName
       tmp.displayName = (obj.links !== undefined && obj.links !== 0) ? obj.name + ' with ' + obj.links + ' links' : obj.name
-      tmp.displayName = (obj.mapTier !== undefined && obj.mapTier !== 0) ? obj.name + ' tier: ' + obj.mapTier : obj.name
+      if (tmp.displayName === tmp.name) {
+        tmp.displayName = (obj.mapTier !== undefined && obj.mapTier !== 0) ? obj.name + ' tier: ' + obj.mapTier : obj.name
+      }
       tmp.id = obj.id
       tmp.value = obj.chaosValue
       tmp.picture = obj.icon

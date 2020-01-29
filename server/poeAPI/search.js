@@ -7,6 +7,20 @@ const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // function filterItemCategoryList () {
 //   return ''.filter((str) => { return str.length !== 0 })
 // }
+function getMinMaxLevels (parameter, paramValue) {
+  const ret = {
+    min: parseInt(paramValue),
+    max: parseInt(paramValue)
+  }
+  if (parameter.includes('Min')) {
+    ret.max = null
+  }
+  if (parameter.includes('Max')) {
+    ret.min = null
+  }
+  return ret
+}
+
 function updateFilterFunction (currFilter, parameter, paramValue) {
   if (parameter === 'name' || parameter === 'type') {
     currFilter.query[parameter] = paramValue.toString()
@@ -15,14 +29,11 @@ function updateFilterFunction (currFilter, parameter, paramValue) {
     currFilter.query.filters.type_filters.disabled = false
     currFilter.query.filters.type_filters.filters.rarity = paramValue.toString()
   }
-  if (parameter === 'maptier') {
+  if (parameter.includes('maptier')) {
     currFilter.query.filters.map_filters.disabled = false
-    currFilter.query.filters.map_filters.filters.map_tier = {
-      min: parseInt(paramValue),
-      max: parseInt(paramValue)
-    }
+    currFilter.query.filters.map_filters.filters.map_tier = getMinMaxLevels(parameter, paramValue)
   }
-  if (parameter === 'socketlinks') {
+  if (parameter.includes('socketlinks')) {
     currFilter.query.filters.socket_filters.disabled = false
     currFilter.query.filters.socket_filters.filters.links = {
       min: parseInt(paramValue),
