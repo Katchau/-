@@ -38,13 +38,34 @@ export default {
 
   methods: {
 
+    getItemStringParams (item) {
+      let ret = ''
+      if (item.isRelic) {
+        ret += '&relic=true'
+      }
+      if (item.mapTier > 0) {
+        ret += `&maptier=${item.mapTier}`
+      }
+      if (item.variant !== null) {
+        ret += `&variant=${item.variant}`
+      }
+      if (item.links > 0) {
+        ret += `&socketlinks=${item.links}`
+      }
+      return ret
+    },
+
     searchTradeItem (obj) {
       if (obj.baseType === undefined) {
         return
       }
       this.search = true
+      let queryString = `/poe/${this.type}/${obj.name}`
+      if (obj.baseType !== null && !obj.name.includes(obj.baseType)) {
+        queryString += `&${obj.baseType}`
+      }
       this.$router.push({
-        path: `/poe/${this.type}/${obj.name}&${obj.baseType}`
+        path: queryString + this.getItemStringParams(obj.usefulInfo)
       })
     }
 

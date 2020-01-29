@@ -109,7 +109,15 @@ export const actions = {
       tmp.id = obj.id
       tmp.value = obj.chaosValue
       tmp.picture = obj.icon
-      tmp.baseType = obj.baseType
+      tmp.baseType = obj.baseType // having itemType would be nice to identify if it was a item or not but no need for now
+      tmp.usefulInfo = {
+        isRelic: obj.detailsId.includes('-relic'),
+        mapTier: obj.mapTier,
+        gemLvl: obj.gemLevel,
+        gemQlt: obj.gemQuality,
+        variant: obj.variant,
+        links: obj.links
+      }
       ret.push(tmp)
     })
     commit('SET_ITEM', ret)
