@@ -24,12 +24,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.sockets !== null">
-        Sockets:
-        <span v-for="(socket, i) in item.sockets" :key="i" :class="colourClass(socket.sColour)">
-          {{ socket.group }}
-        </span>
-      </div>
+      <Sockets v-if="item.sockets !== null" :sockets="item.sockets" />
       <!--      todo melhorar isto aqui-->
       <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i">
         {{ imp }}
@@ -51,9 +46,10 @@
 </template>
 
 <script>
+import Sockets from './Sockets'
 export default {
   name: 'ItemDisplayer',
-
+  components: { Sockets },
   props: {
     item: {
       type: Object,
@@ -96,19 +92,6 @@ export default {
       return ''
     }
 
-  },
-
-  methods: {
-    colourClass (colour) {
-      switch (colour) {
-        case 'R': return 'red--text'
-        case 'G': return 'green--text'
-        case 'B': return 'blue--text'
-        case 'A': return 'brown--text'
-        case 'W': return 'yellow--text'
-        default: return 'black--text'
-      }
-    }
   }
 
 }
