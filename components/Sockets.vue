@@ -1,8 +1,9 @@
 <template>
   <div class="socket">
-    <div v-for="(row, i) in structure" :key="'sck' + i" :class="`d-flex flex-row`">
+    <div v-for="(row, i) in structure" :key="'sck' + i" :class="selectSide(i)">
       <div v-for="(socket, j) in row" :key="'sockets' + j" :class="colourClass(socket.sColour) + ' socketCircle mx-2 mb-3'" />
-      <div v-if="row.length > 1 && row[0].group === row[1].group" class="socketLink socketLinkHorizontal mx-8 mt-2" />
+      <div v-if="row.length > 1 && row[0].group === row[1].group && i===2" class="socketLink socketLinkHorizontal mx-n8 mt-2" />
+      <div v-else-if="row.length > 1 && row[0].group === row[1].group" class="socketLink socketLinkHorizontal mx-8 mt-2" />
     </div>
   </div>
 </template>
@@ -59,10 +60,10 @@ export default {
     },
 
     selectSide (index) {
-      if (index) {
-        return 'justify-md-end'
+      if (index === 2) {
+        return 'd-flex flex-row-reverse'
       }
-      return 'leftSide'
+      return 'd-flex flex-row'
     }
   }
 
@@ -109,6 +110,9 @@ export default {
     width: 38px;
     height: 15px;
     position: absolute;
+  }
+  .fix3{
+    opacity: 0;
   }
   .rip{
     opacity: 0;

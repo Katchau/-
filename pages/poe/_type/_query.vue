@@ -14,9 +14,11 @@
         <v-list-item v-for="(re, i) in results" :key="i">
           <div class="conteudo">
             <div>
-              <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo" contain>
-                <Sockets v-if="re.itemDetails.sockets !== null" :sockets="re.itemDetails.sockets" />
-              </v-img>
+              <v-hover v-slot:default="{ hover }">
+                <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo" contain>
+                  <Sockets v-if="re.itemDetails.sockets !== null && hover" :sockets="re.itemDetails.sockets" />
+                </v-img>
+              </v-hover>
             </div>
             <div>
               {{ re.itemDetails.name }}
@@ -27,7 +29,7 @@
                 </span>
               </p>
             </div>
-            <ItemDisplayer :item="re.itemDetails" hidden/>
+            <ItemDisplayer :item="re.itemDetails" hidden />
             <v-btn v-on:click="copyMessage(re.whisperMsg, i)" small rounded>
               Copy Whisper message to clipboard
             </v-btn>
