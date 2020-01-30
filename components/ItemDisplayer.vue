@@ -24,7 +24,6 @@
           </span>
         </div>
       </div>
-      <Sockets v-if="item.sockets !== null" :sockets="item.sockets" />
       <!--      todo melhorar isto aqui-->
       <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i">
         {{ imp }}
@@ -46,10 +45,8 @@
 </template>
 
 <script>
-import Sockets from './Sockets'
 export default {
   name: 'ItemDisplayer',
-  components: { Sockets },
   props: {
     item: {
       type: Object,
