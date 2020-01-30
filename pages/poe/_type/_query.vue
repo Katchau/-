@@ -14,11 +14,11 @@
         <v-list-item v-for="(re, i) in results" :key="i">
           <div class="conteudo">
             <div>
-              <v-hover v-slot:default="{ hover }">
-                <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo" contain>
-                  <Sockets v-if="re.itemDetails.sockets !== null && hover" :sockets="re.itemDetails.sockets" />
-                </v-img>
-              </v-hover>
+              <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo" contain>
+                <div class="fill-height hoverCenas">
+                  <Sockets v-if="re.itemDetails.sockets !== null" :sockets="re.itemDetails.sockets" />
+                </div>
+              </v-img>
             </div>
             <div>
               {{ re.itemDetails.name }}
@@ -148,5 +148,14 @@ export default {
   }
   .stickMe{
     position: sticky !important;
+  }
+  .hoverCenas{
+    transition: opacity 0.5s;
+    opacity: 0;
+  }
+  .hoverCenas:hover{
+    opacity: 100%;
+    background: rgb(189,189,189);
+    background: radial-gradient(circle, rgba(189,189,189,1) 0%, rgba(163,168,173,0) 59%);
   }
 </style>
