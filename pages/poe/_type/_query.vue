@@ -7,18 +7,23 @@
       <v-alert v-else-if="success !== null" type="error">
         {{ displayMsg }}
       </v-alert>
+
       <v-list class="shopthingy center">
         <v-list-item-title class="titulo display-2 font-weight-medium">
           {{ title }}
         </v-list-item-title>
+
         <v-list-item v-for="(re, i) in results" :key="i">
           <div class="conteudo">
-            <div>
-              <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo" contain>
-                <div class="fill-height hoverCenas">
-                  <Sockets v-if="re.itemDetails.sockets !== null" :sockets="re.itemDetails.sockets" />
+            <div v-on:click="flip(0)" :class="flipped[0] ? 'flipImage flipped' : 'flipImage'">
+              <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo front" contain>
+                <div v-if="re.itemDetails.sockets !== undefined" class="fill-height hoverCenas">
+                  <Sockets v-if="re.itemDetails.sockets.length > 0" :sockets="re.itemDetails.sockets" />
                 </div>
               </v-img>
+              <div class="back">
+                {{ flipped[0] }}
+              </div>
             </div>
             <div>
               {{ re.itemDetails.name }}
@@ -54,6 +59,7 @@ export default {
     return {
       dialog: false,
       displayMsg: '',
+      flipped: [false],
       success: null
     }
   },
@@ -98,6 +104,7 @@ export default {
         context.store.dispatch('setSearchResults', data)
         context.store.dispatch('setLoadingScreen', false)
         return {
+          // flipped: Array(data.result.length).fill(false),
           results: context.store.getters.searchResults,
           dialog: true
         }
@@ -123,6 +130,11 @@ export default {
         elCopy.setAttribute('type', 'hidden')
         window.getSelection().removeAllRanges()
       }
+    },
+
+    flip (index) {
+      console.log('qwe')
+      this.flipped[index] = true
     }
   }
 }
@@ -157,5 +169,28 @@ export default {
     opacity: 100%;
     background: rgb(189,189,189);
     background: radial-gradient(circle, rgba(189,189,189,1) 0%, rgba(163,168,173,0) 59%);
+  }
+  .flipImage{
+    perspective: 1000px;
+  }
+  .front, back{
+    backface-visibility: hidden;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .front{
+    z-index: 2;
+  }
+  .back{
+    transform: rotateY(-180deg);
+  }
+  .flipImage.flipped .front{
+    transform: rotateY(180deg);
+  }
+  .flipImage.flipped .back{
+    transform: rotateY(0);
   }
 </style>
