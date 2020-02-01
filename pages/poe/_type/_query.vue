@@ -15,17 +15,14 @@
 
         <v-list-item v-for="(re, i) in results" :key="i">
           <div class="conteudo">
-            <div :class="re.flipped ? 'flipImage flipped' : 'flipImage'">
-              <v-btn v-on:click="flip(i)">
-                qi9owei9oqweujoiqwerujiortghioer
-              </v-btn>
-              <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo front" contain>
-                <div v-if="re.itemDetails.sockets !== undefined" class="fill-height hoverCenas">
-                  <Sockets v-if="re.itemDetails.sockets.length > 0" :sockets="re.itemDetails.sockets" />
-                </div>
-              </v-img>
-              <div class="back">
-                {{ re.flipped }}
+            <div v-on:click="flip(i)" :class="re.flipped ? 'flipImage flipped' : 'flipImage'">
+              <div class="flipper">
+                <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo front" contain>
+                  <div v-if="re.itemDetails.sockets !== undefined" class="fill-height hoverCenas">
+                    <Sockets v-if="re.itemDetails.sockets.length > 0" :sockets="re.itemDetails.sockets" />
+                  </div>
+                </v-img>
+                <ItemDisplayer :item="re.itemDetails" class="back" />
               </div>
             </div>
             <div>
@@ -37,7 +34,6 @@
                 </span>
               </p>
             </div>
-            <ItemDisplayer :item="re.itemDetails" hidden />
             <v-btn v-on:click="copyMessage(re.whisperMsg, i)" small rounded>
               Copy Whisper message to clipboard
             </v-btn>
@@ -173,7 +169,7 @@ export default {
   .flipImage{
     perspective: 1000px;
   }
-  .front, back{
+  .front, .back{
     backface-visibility: hidden;
     transition: 0.6s;
     transform-style: preserve-3d;
@@ -185,12 +181,16 @@ export default {
     z-index: 2;
   }
   .back{
-    transform: rotateY(-180deg);
+    transform: rotateY(180deg);
+    position: absolute;
   }
   .flipImage.flipped .front{
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
   }
   .flipImage.flipped .back{
     transform: rotateY(0);
+  }
+  .flipper{
+    position: relative;
   }
 </style>
