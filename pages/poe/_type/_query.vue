@@ -15,14 +15,17 @@
 
         <v-list-item v-for="(re, i) in results" :key="i">
           <div class="conteudo">
-            <div v-on:click="flip(0)" :class="flipped[0] ? 'flipImage flipped' : 'flipImage'">
+            <div :class="re.flipped ? 'flipImage flipped' : 'flipImage'">
+              <v-btn v-on:click="flip(i)">
+                qi9owei9oqweujoiqwerujiortghioer
+              </v-btn>
               <v-img v-bind:src="re.picture" v-bind:alt="re.itemDetails.name" max-width="40%" class="conteudo front" contain>
                 <div v-if="re.itemDetails.sockets !== undefined" class="fill-height hoverCenas">
                   <Sockets v-if="re.itemDetails.sockets.length > 0" :sockets="re.itemDetails.sockets" />
                 </div>
               </v-img>
               <div class="back">
-                {{ flipped[0] }}
+                {{ re.flipped }}
               </div>
             </div>
             <div>
@@ -59,7 +62,6 @@ export default {
     return {
       dialog: false,
       displayMsg: '',
-      flipped: [false],
       success: null
     }
   },
@@ -104,7 +106,6 @@ export default {
         context.store.dispatch('setSearchResults', data)
         context.store.dispatch('setLoadingScreen', false)
         return {
-          // flipped: Array(data.result.length).fill(false),
           results: context.store.getters.searchResults,
           dialog: true
         }
@@ -133,8 +134,7 @@ export default {
     },
 
     flip (index) {
-      console.log('qwe')
-      this.flipped[index] = true
+      this.$store.dispatch('changeFlipState', index)
     }
   }
 }

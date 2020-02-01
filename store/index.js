@@ -39,6 +39,10 @@ export const mutations = {
     state.searchResults = results
   },
 
+  SET_FLIP (state, index) {
+    state.searchResults[index].flipped = !state.searchResults[index].flipped
+  },
+
   SET_LOADING (state, loading) {
     state.loadingScreen = loading
   }
@@ -140,9 +144,14 @@ export const actions = {
       tmp.price = obj.listing.price
       tmp.picture = obj.item.icon
       tmp.itemDetails = obj.item
+      tmp.flipped = false
       ret.push(tmp)
     })
     commit('SET_RESULTS', ret)
+  },
+
+  changeFlipState ({ commit }, index) {
+    commit('SET_FLIP', index)
   },
 
   setLoadingScreen ({ commit }, state) {
