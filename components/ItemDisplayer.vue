@@ -1,5 +1,5 @@
 <template>
-  <div :class="checkBackgroundColour">
+  <v-card :class="checkBackgroundColour + ' itemInfo'">
     <!--    {{ item.itemDetails.name }}-->
     <!--    <p v-if="item.price !== null">-->
     <!--      {{ (item.price.amount).toFixed(2) }}-->
@@ -7,11 +7,11 @@
     <!--        {{ item.price.currency }}-->
     <!--      </span>-->
     <!--    </p>-->
-    <div>
-      Item level: {{ item.ilvl }}
-    </div>
-    <div v-if="item.identified" :class="checkCorruption">
-      <div v-if="item.properties">
+    <div :class="checkCorruption + ' itemHeader'">
+      <div>
+        Item level: {{ item.ilvl }}
+      </div>
+      <div v-if="item.identified && item.properties">
         <div v-for="(prop, i) in item.properties" :key="'a' + i">
           {{ prop.name }}
           <span v-if="prop.values[0] !== undefined">
@@ -24,24 +24,29 @@
           </span>
         </div>
       </div>
-      <!--      todo melhorar isto aqui-->
-      <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i">
-        {{ imp }}
-      </div>
-      <div v-if="item.explicitMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i">
-        {{ exp }}
-      </div>
-      <div v-if="item.enchantMods" v-for="(exp, i) in item.enchantMods" :key="'d' + i">
-        Enchanted: {{ exp }}
-      </div>
-      <div v-if="item.fracturedMods" v-for="(exp, i) in item.fracturedMods" :key="'e' + i">
-        Fractured: {{ exp }}
-      </div>
-      <div v-if="item.craftedtMods" v-for="(exp, i) in item.craftedtMods" :key="'f' + i">
-        Crafted: {{ exp }}
-      </div>
     </div>
-  </div>
+    <!--      todo melhorar isto aqui-->
+    <v-divider />
+    <div v-if="item.implicitMods" v-for="(imp, i) in item.implicitMods" :key="'b' + i" class="">
+      {{ imp }}
+    </div>
+    <div v-if="item.utilityMods" v-for="(imp, i) in item.utilityMods" :key="'g' + i" class="">
+      {{ imp }}
+    </div>
+    <v-divider />
+    <div v-if="item.explicitMods" v-for="(exp, i) in item.explicitMods" :key="'c' + i" class="">
+      {{ exp }}
+    </div>
+    <div v-if="item.enchantMods" v-for="(exp, i) in item.enchantMods" :key="'d' + i" class="">
+      Enchanted: {{ exp }}
+    </div>
+    <div v-if="item.fracturedMods" v-for="(exp, i) in item.fracturedMods" :key="'e' + i" class="">
+      Fractured: {{ exp }}
+    </div>
+    <div v-for="(craft, d) in item.craftedMods" :key="'f' + d" class="cyan--text">
+      Crafted: {{ craft }}
+    </div>
+  </v-card>
 </template>
 
 <script>
@@ -56,7 +61,7 @@ export default {
 
   computed: {
     checkCorruption () {
-      return this.item.corruption ? 'red' : ''
+      return this.item.corrupted ? 'red--text' : ''
     },
     // todo melhorar isto aqui, por imagens em vez desta porra
     checkBackgroundColour () {
@@ -64,7 +69,7 @@ export default {
         return 'reliquia'
       }
       if (this.item.shaper) {
-        return 'violet'
+        return 'shaper'
       }
       if (this.item.elder) {
         return 'purple'
@@ -95,8 +100,20 @@ export default {
 </script>
 
 <style scoped>
-.reliquia{
-  background: rgb(255,248,0);
-  background: linear-gradient(180deg, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
-}
+  .reliquia{
+    background: rgb(255,248,0);
+    background: linear-gradient(180deg, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
+  }
+  .itemInfo{
+    /*display: table;*/
+  }
+  .itemHeader{
+    border-style: solid;
+    border-color: darkgray;
+  }
+  .shaper{
+    background: url("../static/images/poe/shaper.png") no-repeat;
+    /*-webkit-background-clip: text;*/
+    /*-webkit-text-fill-color: transparent;*/
+  }
 </style>
