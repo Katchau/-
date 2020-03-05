@@ -1,5 +1,5 @@
 <template>
-  <v-card :class="checkBackgroundColour + ' itemInfo'">
+  <v-card class="itemInfo">
     <!--    {{ item.itemDetails.name }}-->
     <!--    <p v-if="item.price !== null">-->
     <!--      {{ (item.price.amount).toFixed(2) }}-->
@@ -7,21 +7,23 @@
     <!--        {{ item.price.currency }}-->
     <!--      </span>-->
     <!--    </p>-->
-    <div :class="checkCorruption + ' itemHeader'">
-      <div>
-        Item level: {{ item.ilvl }}
-      </div>
-      <div v-if="item.identified && item.properties">
-        <div v-for="(prop, i) in item.properties" :key="'a' + i">
-          {{ prop.name }}
-          <span v-if="prop.values[0] !== undefined">
-            <span v-if="prop.values[0][0] !== undefined">
-              {{ prop.values[0][0] }}
+    <div :class="checkCorruption + ' itemHeader'" :style="checkBackgroundColour">
+      <div :class="changeHeaderColour + ' headerInfo itemHeader'">
+        <div>
+          Item level: {{ item.ilvl }}
+        </div>
+        <div v-if="item.identified && item.properties">
+          <div v-for="(prop, i) in item.properties" :key="'a' + i">
+            {{ prop.name }}
+            <span v-if="prop.values[0] !== undefined">
+              <span v-if="prop.values[0][0] !== undefined">
+                {{ prop.values[0][0] }}
+              </span>
+              <span v-else>
+                {{ prop.values[0] }}
+              </span>
             </span>
-            <span v-else>
-              {{ prop.values[0] }}
-            </span>
-          </span>
+          </div>
         </div>
       </div>
     </div>
@@ -63,35 +65,50 @@ export default {
     checkCorruption () {
       return this.item.corrupted ? 'red--text' : ''
     },
-    // todo melhorar isto aqui, por imagens em vez desta porra
+
+    changeHeaderColour () {
+      return this.$vuetify.theme.dark ? 'darkHeader' : 'whiteHeader'
+    },
+
+    // todo melhorar isto aqui, está cancro
     checkBackgroundColour () {
+      const tmp = []
+      const ret = {
+        background: ''
+      }
       if (this.item.isRelic !== undefined) {
-        return 'reliquia'
+        ret.background = 'linear-gradient(180deg, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%)'
+        return ret
       }
       if (this.item.shaper) {
-        return 'shaper'
+        tmp.push('rgba(56,50,180,1)')
       }
       if (this.item.elder) {
-        return 'purple'
+        tmp.push('rgba(103,65,143,1)')
       }
       if (this.item.influences !== undefined) {
         const influence = this.item.influences
         // as of now you cannot have more than 1. inb4 this changes :')
         // lmao last update made possible having 2. oops, need to make changes here then
         if (influence.hunter) {
-          return 'green'
+          tmp.push('rgba(26,101,30,1)')
         }
         if (influence.crusader) {
-          return 'orange'
+          tmp.push('rgba(198,51,51,1)')
         }
         if (influence.redeemer) {
-          return 'blue'
+          tmp.push('rgba(28,126,181,1)')
         }
         if (influence.warlord) {
-          return 'yellow'
+          tmp.push('rgba(232,221,60,1)')
         }
       }
-      return ''
+      if (tmp.length === 1) {
+        ret.background = tmp[0]
+      } else if (tmp.length > 1) {
+        ret.background = `linear-gradient(180deg, ${tmp[0]} 0%, ${tmp[1]} 100%)`
+      }
+      return ret
     }
 
   }
@@ -104,15 +121,24 @@ export default {
     background: rgb(255,248,0);
     background: linear-gradient(180deg, rgba(255,248,0,1) 0%, rgba(35,144,150,1) 64%, rgba(0,212,255,1) 100%);
   }
-  .itemInfo{
+  .headerInfo{
     /*display: table;*/
+    margin: 5%;
+  }
+  .whiteHeader{
+    background-color: white;
+  }
+  .darkHeader{
+    background-color: #424242;
   }
   .itemHeader{
     border-style: solid;
     border-color: darkgray;
   }
+  .itemInfo{
+  }
   .shaper{
-    background: url("../static/images/poe/shaper.png") no-repeat;
+    /*background: url("../static/images/poe/shaper.png") no-repeat;*/
     /*-webkit-background-clip: text;*/
     /*-webkit-text-fill-color: transparent;*/
   }

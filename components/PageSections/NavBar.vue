@@ -55,7 +55,7 @@
             </div>
           </v-img>
         </v-list-item>
-        <v-list-item class="cancer">
+        <v-list-item v-on:click="changePage('/poe/search')" class="cancer">
           <v-list-item-content class="cancer">
             <v-img src="/../images/sidebar/hm.jpeg" class="navImage">
               <div class="fill-height bottom-gradient">
