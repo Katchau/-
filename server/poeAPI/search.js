@@ -4,6 +4,15 @@ const url = 'https://www.pathofexile.com/api/trade/search/Standard'
 const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
 
+// why? i dont honestly remember
+// i think its because they change the api and the true or false value can change between
+// boolean and string for some god damn reason
+function getOptionsObject(paramValue) {
+  return {
+    option: paramValue.toString()
+  }
+}
+
 // function filterItemCategoryList () {
 //   return ''.filter((str) => { return str.length !== 0 })
 // }
@@ -21,24 +30,57 @@ function getMinMaxLevels (parameter, paramValue) {
   return ret
 }
 
+function setMapFilters (parameter, paramValue) {
+  const mapFilter = {}
+  if (parameter.includes('maptier')) {
+    mapFilter.map_tier = getMinMaxLevels(parameter, paramValue)
+    return mapFilter
+  }
+  if (parameter.match(/^(map_elder|map_shaped|map_blighted|map_series)/)) {
+    mapFilter[parameter] = getOptionsObject(paramValue)
+  }
+  return mapFilter
+}
+
+function setMiscFilters (parameter, paramValue) {
+  const miscFilters = {}
+  if (parameter.matches(/^(quality|ilvl|gem_level|gem_level_progress).*/)) {
+    miscFilters[parameter] = getMinMaxLevels(parameter, paramValue)
+    return miscFilters
+  }
+  // comboio incoming
+  if (parameter.matches(/ˆ(shaper|crusader|hunter|elder|redeemer|warlord|fractured|synthesised)_item/)) {
+    miscFilters[parameter] = getOptionsObject(paramValue)
+    return miscFilters
+  }
+  // outro
+  if (parameter.matches(/^(identified|alternate_art|corrupted|crafted|enchanted|mirrored|veiled)/)) {
+    miscFilters[parameter] = getOptionsObject(paramValue)
+  }
+  return miscFilters
+}
+
 function updateFilterFunction (currFilter, parameter, paramValue) {
   if (parameter === 'name' || parameter === 'type') {
     currFilter.query[parameter] = paramValue.toString()
-  }
-  if (parameter === 'rarity') {
+  } else if (parameter === 'rarity') {
     currFilter.query.filters.type_filters.disabled = false
     currFilter.query.filters.type_filters.filters.rarity = paramValue.toString()
-  }
-  if (parameter.includes('maptier')) {
+  } else if (parameter === 'typeCategory') {
+    currFilter.query.filters.type_filters.disabled = false
+    currFilter.query.filters.type_filters.filters.category = paramValue.toString()
+  } else if (parameter.includes('map')) {
     currFilter.query.filters.map_filters.disabled = false
-    currFilter.query.filters.map_filters.filters.map_tier = getMinMaxLevels(parameter, paramValue)
-  }
-  if (parameter.includes('socketlinks')) {
+    currFilter.query.filters.map_filters.filters = setMapFilters(parameter, paramValue)
+  } else if (parameter.includes('sockets')) {
     currFilter.query.filters.socket_filters.disabled = false
-    currFilter.query.filters.socket_filters.filters.links = {
-      min: parseInt(paramValue),
-      max: parseInt(paramValue)
-    }
+    currFilter.query.filters.socket_filters.filters.sockets = getMinMaxLevels(parameter, paramValue)
+  } else if (parameter.includes('socketlinks')) {
+    currFilter.query.filters.socket_filters.disabled = false
+    currFilter.query.filters.socket_filters.filters.links = getMinMaxLevels(parameter, paramValue)
+  } else {
+    currFilter.query.filters.misc_filters.disabled = false
+    currFilter.query.filters.misc_filters.filters = setMiscFilters(parameter, paramValue)
   }
   return currFilter
 }

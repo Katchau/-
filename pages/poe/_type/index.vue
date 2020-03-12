@@ -1,7 +1,7 @@
 <template>
   <v-alert type="info">
     Click on an image to select the item!
-    Right Now only Unique stuff works! Sorry :(
+    Right now there is missing certain elements like fragments and search methods
   </v-alert>
 </template>
 
