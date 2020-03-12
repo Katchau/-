@@ -55,3 +55,7 @@ app.get('/getItems', function (req, res) {
 app.get('/searchItem', function (req, res) {
   require('./poeAPI/search').searchItem(req, res)
 })
+
+app.post('/search', function (req, res) {
+  require('./poeAPI/search').searchItem(req, res)
+})

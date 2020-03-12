@@ -7,7 +7,7 @@ const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 // why? i dont honestly remember
 // i think its because they change the api and the true or false value can change between
 // boolean and string for some god damn reason
-function getOptionsObject(paramValue) {
+function getOptionsObject (paramValue) {
   return {
     option: paramValue.toString()
   }
@@ -123,15 +123,23 @@ module.exports.searchItem = function (req, res) {
     }
   }
 
-  let params = decodeURIComponent(req.url).split('?')[1]
-  if (!params.includes('type=')) {
-    params = params.replace('name=', 'type=')
+  let params = req.body?.params || decodeURIComponent(req.url).split('?')[1]
+  if (req.body?.params) {
+    console.log('oh yeah')
+    params.forEach((option) => {
+      const tmp = option.split('=')
+      searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
+    })
+  } else {
+    if (!params.includes('type=')) {
+      params = params.replace('name=', 'type=')
+    }
+    const options = params.split('&')
+    options.forEach((option) => {
+      const tmp = option.split('=')
+      searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
+    })
   }
-  const options = params.split('&')
-  options.forEach((option) => {
-    const tmp = option.split('=')
-    searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
-  })
   const authOptions = {
     url: url.toString(),
     body: searchInfo,
