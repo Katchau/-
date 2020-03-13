@@ -123,8 +123,9 @@ module.exports.searchItem = function (req, res) {
     }
   }
 
-  let params = req.body?.params || decodeURIComponent(req.url).split('?')[1]
-  if (req.body?.params) {
+  const isPost = (req.body && req.body.params)
+  let params = isPost ? req.body.params : decodeURIComponent(req.url).split('?')[1]
+  if (isPost) {
     console.log('oh yeah')
     params.forEach((option) => {
       const tmp = option.split('=')
