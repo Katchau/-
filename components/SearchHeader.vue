@@ -1,7 +1,7 @@
 <template>
   <v-form>
-    <v-row v-for="(column, key) in columns" :key="key">
-      <SearchOptions :option="column"/>
+    <v-row v-for="(row, key) in rows" :key="'row' + key">
+      <SearchOptions v-for="(column, key2) in row" :key="'col' + key2" :name="column.name" :fields="column.fields" @searchAnswer="buildAnswer" />
     </v-row>
   </v-form>
 </template>
@@ -13,32 +13,138 @@ export default {
   components: { SearchOptions },
   data () {
     return {
-      columns: [
+      searchOptions: {},
+      rows: [
+        [
+          {
+            name: 'Type Filters',
+            fields: [
+              {
+                label: 'Item Category',
+                isMinMax: false,
+                items: this.getItemObject('Any,Jewel,Abyss Jewel,Weapon,One handed Weapon,One handed melee Weapon,Two handed Weapon,Two handed melee Weapon,Bow,Claw,Dagger,One handed Axe,Two handed Axe,One handed Sword,Two handed Sword,Mace,Sceptre,Two handed mace,Staff,Wand,Armour,Chest,Helmet,Boots,Gloves,Shield,Quiver,Accessory,Ring,Amulet,Belt', ',jewel,jewel.abyss,weapon,weapon.one,weapon.onemelee,weapon.two,weapon.twomelee,weapon.bow,weapon.claw,weapon.dagger,weapon.oneaxe,weapon.twoaxe,weapon.onesword,weapon.twosword,weapon.onemace,weapon.sceptre,weapon.twomace,weapon.staff,weapon.wand,armour,armour.chest,armour.helmet,armour.boots,armour.gloves,armour.shield,armour.quiver,accessory,accessory.ring,accessory.amulet,accessory.belt', 'typeCategory')
+              },
+              {
+                label: 'Item Rarity',
+                isMinMax: false,
+                items: this.getItemObject('Any,Any Non-Unique,Unique,Relic,Rare,Magic,Normal', ',nonunique,unique,uniquefoil,rare,magic,normal', 'rarity')
+              }
+            ]
+          },
+          {
+            name: 'Maps',
+            fields: [
+              {
+                label: 'Map Tier',
+                isMinMax: true,
+                items: []
+              },
+              {
+                label: 'Shaped Map',
+                isMinMax: false,
+                items: this.getDefaultItem('map_shaped')
+              },
+              {
+                label: 'Elder Map',
+                isMinMax: false,
+                items: this.getDefaultItem('map_elder')
+              },
+              {
+                label: 'Blighted Map',
+                isMinMax: false,
+                items: this.getDefaultItem('map_blighted')
+              },
+              {
+                label: 'Map Series',
+                isMinMax: false,
+                items: []
+              }
+            ]
+          }
+        ],
+        [
+          {
+            name: 'cenas',
+            fields: [
+              {
+                label: 'LMAO',
+                isMinMax: false,
+                isTrueFalse: true,
+                items: [
+                  {
+                    text: 'Any',
+                    value: undefined
+                  },
+                  {
+                    text: 'Yes',
+                    value: {
+                      cenas:
+                        'true'
+                    }
+                  },
+                  {
+                    text: 'No',
+                    value: {
+                      cenas:
+                        'false'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  },
+
+  methods: {
+    getItemObject (names, list, parameterType) {
+      const items = []
+      const nameArray = names.split(',')
+      const listArray = list.split(',')
+      listArray.forEach((obj, i) => {
+        items.push({
+          text: nameArray[i],
+          value: {
+            parameter: parameterType,
+            coiso: obj
+          }
+        })
+      })
+      return items
+    },
+    getDefaultItem (parameterType) {
+      return [
         {
-          name: 'cenas',
-          label: 'LMAO',
-          filters: [
-            {
-              text: 'Any',
-              value: undefined
-            },
-            {
-              text: 'Yes',
-              value: {
-                cenas:
-                  'true'
-              }
-            },
-            {
-              text: 'No',
-              value: {
-                cenas:
-                  'false'
-              }
-            }
-          ]
+          text: 'Any',
+          value: {
+            parameter: parameterType,
+            coiso: undefined
+          }
+        },
+        {
+          text: 'Yes',
+          value: {
+            parameter: parameterType,
+            coiso: 'true'
+          }
+        },
+        {
+          text: 'No',
+          value: {
+            parameter: parameterType,
+            coiso: 'false'
+          }
         }
       ]
+    },
+    buildAnswer (answer) {
+      if (answer.parameter) {
+        this.searchOptions[answer.parameter] = answer.coiso
+      } else {
+        console.log(answer)
+      }
     }
   }
 }

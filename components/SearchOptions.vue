@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <span v-if="option.name" class="headline">
-      {{ option.name }}
+  <v-col cols="12" md="4">
+    <span v-if="name" class="headline">
+      {{ name }}
     </span>
-    <div v-if="isMinMax">
-      Aii querias
+    <div v-for="(field, key) in fields" :key="key + field.label">
+      <div v-if="field.isMinMax">
+        Aii querias
+      </div>
+      <v-autocomplete
+        v-else
+        v-model="value"
+        :items="field.items"
+        :filter="customFilter"
+        :label="field.label"
+      />
     </div>
-    <v-autocomplete
-      v-else
-      v-model="value"
-      :items="option.filters"
-      :filter="customFilter"
-      :label="option.label"
-    />
-  </div>
+  </v-col>
 </template>
 
 <script>
@@ -21,14 +23,14 @@ export default {
   name: 'SearchOptions',
 
   props: {
-    option: {
-      type: Object,
-      required: true
-    },
-    isMinMax: {
-      type: Boolean,
+    name: {
+      type: String,
       required: false,
-      default: false
+      default: ''
+    },
+    fields: {
+      type: Array,
+      required: true
     }
   },
 
@@ -41,8 +43,7 @@ export default {
   watch: {
     value: {
       handler (answer) {
-        console.log('oh boy')
-        console.log(answer)
+        this.$emit('searchAnswer', answer)
       }
     }
   },
@@ -50,6 +51,7 @@ export default {
   methods: {
     customFilter (item, queryText, itemText) {
       const textOne = item.text.toLowerCase()
+      if (queryText === undefined) { return true }
       const searchText = queryText.toLowerCase()
 
       return textOne.includes(searchText)
