@@ -78,14 +78,14 @@ export default {
                   {
                     text: 'Yes',
                     value: {
-                      cenas:
+                      parameterValue:
                         'true'
                     }
                   },
                   {
                     text: 'No',
                     value: {
-                      cenas:
+                      parameterValue:
                         'false'
                     }
                   }
@@ -108,7 +108,7 @@ export default {
           text: nameArray[i],
           value: {
             parameter: parameterType,
-            coiso: obj
+            parameterValue: obj
           }
         })
       })
@@ -120,28 +120,28 @@ export default {
           text: 'Any',
           value: {
             parameter: parameterType,
-            coiso: undefined
+            parameterValue: undefined
           }
         },
         {
           text: 'Yes',
           value: {
             parameter: parameterType,
-            coiso: 'true'
+            parameterValue: 'true'
           }
         },
         {
           text: 'No',
           value: {
             parameter: parameterType,
-            coiso: 'false'
+            parameterValue: 'false'
           }
         }
       ]
     },
     buildAnswer (answer) {
       if (answer.parameter) {
-        this.searchOptions[answer.parameter] = answer.coiso
+        this.searchOptions[answer.parameter] = answer.parameterValue
       } else {
         console.log(answer)
       }

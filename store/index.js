@@ -14,7 +14,9 @@ export const state = () => ({
   items: null,
   selection: null,
   searchResults: null,
-  loadingScreen: false
+  loadingScreen: false,
+  itemInfo: [],
+  statInfo: []
 })
 
 export const mutations = {
@@ -45,8 +47,15 @@ export const mutations = {
 
   SET_LOADING (state, loading) {
     state.loadingScreen = loading
-  }
+  },
 
+  SET_ITEM_INFO (state, itemInfo) {
+    state.itemInfo = itemInfo
+  },
+
+  SET_STAT_INFO (state, statInfo) {
+    state.statInfo = statInfo
+  }
 }
 
 export const actions = {

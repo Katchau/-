@@ -59,3 +59,11 @@ app.get('/searchItem', function (req, res) {
 app.post('/search', function (req, res) {
   require('./poeAPI/search').searchItem(req, res)
 })
+
+app.get('/fetchItemInfo', function (req, res) {
+  require('./poeAPI/search').fetchItemInfo(req, res)
+})
+
+app.get('/fetchStatInfo', function (req, res) {
+  require('./poeAPI/search').fetchStatInfo(req, res)
+})

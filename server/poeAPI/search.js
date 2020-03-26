@@ -1,8 +1,12 @@
 // "Request" library
 const request = require('request')
+// TODO https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
+
+// TODO have to dynamically introduce which league to search
 const url = 'https://www.pathofexile.com/api/trade/search/Standard'
 const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
-// https://app.swaggerhub.com/apis/Chuanhsing/poe/1.0.0#/default/get_api_trade_fetch__items_ api stuff
+const itemInfoUrl = 'https://www.pathofexile.com/api/trade/data/items'
+const statInfoUrl = 'https://www.pathofexile.com/api/trade/data/items'
 
 // why? i dont honestly remember
 // i think its because they change the api and the true or false value can change between
@@ -126,7 +130,7 @@ module.exports.searchItem = function (req, res) {
   const isPost = (req.body && req.body.params)
   let params = isPost ? req.body.params : decodeURIComponent(req.url).split('?')[1]
   if (isPost) {
-    console.log('oh yeah')
+    // TODO check if this actually works lmao
     params.forEach((option) => {
       const tmp = option.split('=')
       searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])
@@ -190,6 +194,44 @@ function fetchItem (res, items) {
     } else {
       return res.send({
         location: 'fetch item',
+        success: false,
+        errorMessage: error,
+        responseCode: response.statusCode
+      })
+    }
+  })
+}
+
+module.exports.fetchItemInfo = function (res) {
+  const authOptions = {
+    url: itemInfoUrl,
+    json: true
+  }
+  request.get(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      return res.send(body)
+    } else {
+      return res.send({
+        location: 'fetch item info from PoE',
+        success: false,
+        errorMessage: error,
+        responseCode: response.statusCode
+      })
+    }
+  })
+}
+
+module.exports.fetchStatInfo = function (res) {
+  const authOptions = {
+    url: statInfoUrl,
+    json: true
+  }
+  request.get(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      return res.send(body)
+    } else {
+      return res.send({
+        location: 'fetch stat info from PoE',
         success: false,
         errorMessage: error,
         responseCode: response.statusCode
