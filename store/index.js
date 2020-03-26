@@ -165,8 +165,15 @@ export const actions = {
 
   setLoadingScreen ({ commit }, state) {
     commit('SET_LOADING', state)
-  }
+  },
 
+  setItemInfo ({ commit }, state) {
+    commit('SET_ITEM_INFO', state)
+  },
+
+  setStatInfo ({ commit }, state) {
+    commit('SET_STAT_INFO', state)
+  }
 }
 
 export const getters = {
@@ -193,6 +200,13 @@ export const getters = {
 
   loadingScreen (state) {
     return state.loadingScreen
-  }
+  },
 
+  itemInfo (state) {
+    return state.itemInfo
+  },
+
+  statInfo (state) {
+    return state.statInfo
+  }
 }

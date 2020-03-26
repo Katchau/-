@@ -64,32 +64,12 @@ export default {
         ],
         [
           {
-            name: 'cenas',
+            name: 'Item Search',
             fields: [
               {
-                label: 'LMAO',
+                label: 'Item Name',
                 isMinMax: false,
-                isTrueFalse: true,
-                items: [
-                  {
-                    text: 'Any',
-                    value: undefined
-                  },
-                  {
-                    text: 'Yes',
-                    value: {
-                      parameterValue:
-                        'true'
-                    }
-                  },
-                  {
-                    text: 'No',
-                    value: {
-                      parameterValue:
-                        'false'
-                    }
-                  }
-                ]
+                items: this.$store.getters.itemInfo
               }
             ]
           }

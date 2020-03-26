@@ -12,6 +12,7 @@ import SearchHeader from '../../components/SearchHeader'
 export default {
   name: 'Search',
   components: { SearchHeader },
+  middleware: 'poeSearchFilters',
   transition: 't2'
 }
 </script>
