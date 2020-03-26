@@ -6,7 +6,7 @@ const request = require('request')
 const url = 'https://www.pathofexile.com/api/trade/search/Standard'
 const fetchUrl = 'https://www.pathofexile.com/api/trade/fetch/'
 const itemInfoUrl = 'https://www.pathofexile.com/api/trade/data/items'
-const statInfoUrl = 'https://www.pathofexile.com/api/trade/data/items'
+const statInfoUrl = 'https://www.pathofexile.com/api/trade/data/stats'
 
 // why? i dont honestly remember
 // i think its because they change the api and the true or false value can change between
@@ -209,7 +209,24 @@ module.exports.fetchItemInfo = function (res) {
   }
   request.get(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      return res.send(body)
+      const reduceMethod = function (actual, next) {
+        if (next.entries) {
+          next.entries = next.entries.map((entry) => {
+            const obj = {}
+            obj.value = {
+              name: entry.name,
+              type: entry.type
+            }
+            obj.label = next.label
+            obj.text = entry.text
+            return obj
+          })
+          return actual.concat(next.entries)
+        } else {
+          return actual
+        }
+      }
+      return res.send(body.result.reduce(reduceMethod, []))
     } else {
       return res.send({
         location: 'fetch item info from PoE',
@@ -228,7 +245,23 @@ module.exports.fetchStatInfo = function (res) {
   }
   request.get(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      return res.send(body)
+      const reduceMethod = function (actual, next) {
+        if (next.entries) {
+          next.entries = next.entries.map((entry) => {
+            const obj = {}
+            obj.value = {
+              id: entry.id
+            }
+            obj.label = next.label
+            obj.text = entry.text
+            return obj
+          })
+          return actual.concat(next.entries)
+        } else {
+          return actual
+        }
+      }
+      return res.send(body.result.reduce(reduceMethod, []))
     } else {
       return res.send({
         location: 'fetch stat info from PoE',
