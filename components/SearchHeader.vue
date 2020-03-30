@@ -72,6 +72,16 @@ export default {
                 items: this.$store.getters.itemInfo
               }
             ]
+          },
+          {
+            name: 'Item Stats',
+            fields: [
+              {
+                label: 'Stat list',
+                isMinMax: false,
+                items: this.$store.getters.statInfo
+              }
+            ]
           }
         ]
       ]

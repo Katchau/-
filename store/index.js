@@ -167,12 +167,14 @@ export const actions = {
     commit('SET_LOADING', state)
   },
 
-  setItemInfo ({ commit }, state) {
-    commit('SET_ITEM_INFO', state)
+  async setItemInfo ({ commit }, $axios) {
+    const { data } = await $axios.get('/fetchItemInfo')
+    commit('SET_ITEM_INFO', data)
   },
 
-  setStatInfo ({ commit }, state) {
-    commit('SET_STAT_INFO', state)
+  async setStatInfo ({ commit }, $axios) {
+    const { data } = await $axios.get('/fetchStatInfo')
+    commit('SET_STAT_INFO', data)
   }
 }
 
