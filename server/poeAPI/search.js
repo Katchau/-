@@ -26,10 +26,10 @@ function getMinMaxLevels (parameter, paramValue) {
     max: parseInt(paramValue)
   }
   if (parameter.includes('Min')) {
-    ret.min = null
+    ret.max = null
   }
   if (parameter.includes('Max')) {
-    ret.max = null
+    ret.min = null
   }
   return ret
 }
@@ -130,7 +130,7 @@ module.exports.searchItem = function (req, res) {
   const isPost = (req.body && req.body.params)
   let params = isPost ? req.body.params : decodeURIComponent(req.url).split('?')[1]
   if (isPost) {
-    // TODO check if this actually works lmao
+    // TODO check if this actually works lmao https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames
     params.forEach((option) => {
       const tmp = option.split('=')
       searchInfo = updateFilterFunction(searchInfo, tmp[0], tmp[1])

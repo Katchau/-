@@ -12,8 +12,8 @@
         :label="field.label"
       />
       <div v-if="field.isMinMax && !field.isAutoComplete">
-        <v-text-field v-model="field.items[0].parameterValue" label="Min" />
-        <v-text-field v-model="field.items[1].parameterValue" label="Max" />
+        <v-text-field v-model="field.items[0].parameterValue" :label="field.items[0].label" />
+        <v-text-field v-model="field.items[1].parameterValue" :label="field.items[1].label" />
       </div>
       <span v-if="field.isMinMax && field.isAutoComplete && clickedAnswer.id">
         <v-text-field v-model="clickedAnswer.min" label="Min" />
