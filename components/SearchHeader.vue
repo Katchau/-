@@ -22,11 +22,13 @@ export default {
               {
                 label: 'Item Category',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.getItemObject('Any,Jewel,Abyss Jewel,Weapon,One handed Weapon,One handed melee Weapon,Two handed Weapon,Two handed melee Weapon,Bow,Claw,Dagger,One handed Axe,Two handed Axe,One handed Sword,Two handed Sword,Mace,Sceptre,Two handed mace,Staff,Wand,Armour,Chest,Helmet,Boots,Gloves,Shield,Quiver,Accessory,Ring,Amulet,Belt', ',jewel,jewel.abyss,weapon,weapon.one,weapon.onemelee,weapon.two,weapon.twomelee,weapon.bow,weapon.claw,weapon.dagger,weapon.oneaxe,weapon.twoaxe,weapon.onesword,weapon.twosword,weapon.onemace,weapon.sceptre,weapon.twomace,weapon.staff,weapon.wand,armour,armour.chest,armour.helmet,armour.boots,armour.gloves,armour.shield,armour.quiver,accessory,accessory.ring,accessory.amulet,accessory.belt', 'typeCategory')
               },
               {
                 label: 'Item Rarity',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.getItemObject('Any,Any Non-Unique,Unique,Relic,Rare,Magic,Normal', ',nonunique,unique,uniquefoil,rare,magic,normal', 'rarity')
               }
             ]
@@ -37,26 +39,31 @@ export default {
               {
                 label: 'Map Tier',
                 isMinMax: true,
-                items: []
+                isAutoComplete: false,
+                items: this.getDefaultMinMax('maptier')
               },
               {
                 label: 'Shaped Map',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.getDefaultItem('map_shaped')
               },
               {
                 label: 'Elder Map',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.getDefaultItem('map_elder')
               },
               {
                 label: 'Blighted Map',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.getDefaultItem('map_blighted')
               },
               {
                 label: 'Map Series',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: []
               }
             ]
@@ -69,6 +76,7 @@ export default {
               {
                 label: 'Item Name',
                 isMinMax: false,
+                isAutoComplete: true,
                 items: this.$store.getters.itemInfo
               }
             ]
@@ -78,7 +86,8 @@ export default {
             fields: [
               {
                 label: 'Stat list',
-                isMinMax: false,
+                isMinMax: true,
+                isAutoComplete: true,
                 items: this.$store.getters.statInfo
               }
             ]
@@ -104,6 +113,23 @@ export default {
       })
       return items
     },
+
+    getDefaultMinMax (parameter) {
+      return [
+        {
+          value: {
+            parameter: `${parameter}Min`,
+            parameterValue: undefined
+          }
+        },
+        {
+          value: {
+            parameter: `${parameter}Man`,
+            parameterValue: undefined
+          }
+        }]
+    },
+
     getDefaultItem (parameterType) {
       return [
         {

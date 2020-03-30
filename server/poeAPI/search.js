@@ -26,10 +26,10 @@ function getMinMaxLevels (parameter, paramValue) {
     max: parseInt(paramValue)
   }
   if (parameter.includes('Min')) {
-    ret.max = null
+    ret.min = null
   }
   if (parameter.includes('Max')) {
-    ret.min = null
+    ret.max = null
   }
   return ret
 }

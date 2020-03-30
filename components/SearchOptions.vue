@@ -4,16 +4,21 @@
       {{ name }}
     </span>
     <div v-for="(field, key) in fields" :key="key + field.label">
-      <div v-if="field.isMinMax">
-        Aii querias
-      </div>
       <v-autocomplete
-        v-else
+        v-if="field.isAutoComplete"
         v-model="value"
         :items="field.items"
         :filter="customFilter"
         :label="field.label"
       />
+      <div v-if="field.isMinMax && !field.isAutoComplete">
+        <v-text-field v-model="field.items[0].parameterValue" label="Min" />
+        <v-text-field v-model="field.items[1].parameterValue" label="Max" />
+      </div>
+      <span v-if="field.isMinMax && field.isAutoComplete && clickedAnswer.id">
+        <v-text-field v-model="clickedAnswer.min" label="Min" />
+        <v-text-field v-model="clickedAnswer.max" label="Max" />
+      </span>
     </div>
   </v-col>
 </template>
@@ -36,14 +41,23 @@ export default {
 
   data () {
     return {
-      value: Object
+      value: Object,
+      clickedAnswer: {}
     }
   },
 
   watch: {
     value: {
       handler (answer) {
-        this.$emit('searchAnswer', answer)
+        if (answer.id) {
+          this.clickedAnswer.stat = true
+          this.clickedAnswer.id = answer.id
+          this.clickedAnswer.min = undefined
+          this.clickedAnswer.max = undefined
+          this.$emit('searchAnswer', this.clickedAnswer)
+        } else {
+          this.$emit('searchAnswer', answer)
+        }
       }
     }
   },
