@@ -9,6 +9,9 @@
         @searchAnswer="buildAnswer"
       />
     </v-row>
+    <v-btn @click="sendRequest">
+      Search for the item you ugly twat
+    </v-btn>
   </v-form>
 </template>
 
@@ -312,12 +315,55 @@ export default {
         }
       ]
     },
+
+    // TODO be careful if the order is changed because this is depending on that
+    updateMinMaxAnswers () {
+      const rowsWithMinMax = [...this.rows[0]]
+      rowsWithMinMax.forEach((row) => {
+        row.forEach((columns) => {
+          columns.fields.forEach((field) => {
+            if (field.isMinMax) {
+              const fieldMinValue = field.items[0].value
+              const fieldMaxValue = field.items[1].value
+              if (fieldMinValue.parameterValue) {
+                this.searchOptions[fieldMinValue.parameter] = fieldMinValue.parameterValue
+              }
+              if (fieldMaxValue.parameterValue) {
+                this.searchOptions[fieldMaxValue.parameter] = fieldMaxValue.parameterValue
+              }
+            }
+          })
+        })
+      })
+    },
+
     buildAnswer (answer) {
       if (answer.parameter) {
         this.searchOptions[answer.parameter] = answer.parameterValue
-      } else {
+        return
+      } else if (answer.id) {
+        if (!this.searchOptions.stats) {
+          this.searchOptions.stats = []
+        }
+        this.searchOptions.stats.push(answer)
+        return
+      }
+      if (answer.name) {
+        this.searchOptions.name = answer.name
+      }
+      if (answer.type) {
+        this.searchOptions.type = answer.type
+      }
+
+      if (!answer.type && !answer.name) {
+        // TODO provavelmente ter aqui alguma coisa
         console.log(answer)
       }
+    },
+    sendRequest () {
+      // TODO this is the lazy method, update this after if i want to lmao
+      this.updateMinMaxAnswers()
+      console.log(this.searchOptions)
     }
   }
 }

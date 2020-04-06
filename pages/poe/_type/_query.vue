@@ -54,6 +54,14 @@ export default {
   components: { Sockets, ItemDisplayer },
   transition: 't1',
 
+  props: {
+    searchOptions: {
+      type: Object,
+      required: false,
+      default: undefined
+    }
+  },
+
   data () {
     return {
       dialog: false,
@@ -85,9 +93,6 @@ export default {
   // isto vai dar ao mesmo que asyncData só que este necessita de dar return para dar merge com os dados a cima, enquanto que o fetch dá mais jeito para fazer pedidos
   // oops agr isto é asyncData. de qq das maneiras, isto com fetch daria ao msm, só que não seria necessário o return e teria de usar um computed para is buscar à store
   asyncData (context) {
-    // return new Promise((resolve, reject) => {
-    //   console.log('olup') resolve para o codigo que queres lancar seguigo de then e catch
-    // })
     const tmp = context.route.params.query.toString().split('&')
     let queryString = `/searchItem?name=${tmp[0]}`
     for (let i = 1; i < tmp.length; i++) {
