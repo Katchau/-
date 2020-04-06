@@ -4,14 +4,14 @@
       {{ name }}
     </span>
     <div v-for="(field, key) in fields" :key="key + field.label">
-      <SearchAutoComplete :field="field" @autoAnswer="updateSearchAnswer" />
+      <SearchAutoComplete :field="field" :list-key="key" @autoAnswer="updateSearchAnswer" />
       <div v-if="field.isMinMax && !field.isAutoComplete">
         <v-text-field v-model="field.items[0].parameterValue" :label="field.items[0].label" />
         <v-text-field v-model="field.items[1].parameterValue" :label="field.items[1].label" />
       </div>
-      <span v-if="field.isMinMax && field.isAutoComplete && clickedAnswer.id">
-        <v-text-field v-model="clickedAnswer.min" label="Min" />
-        <v-text-field v-model="clickedAnswer.max" label="Max" />
+      <span v-if="field.isMinMax && field.isAutoComplete && field.clickedAnswer.id">
+        <v-text-field v-model="field.clickedAnswer.min" label="Min" />
+        <v-text-field v-model="field.clickedAnswer.max" label="Max" />
       </span>
     </div>
   </v-col>
@@ -37,15 +37,18 @@ export default {
 
   data () {
     return {
-      value: Object,
-      clickedAnswer: {}
+      value: Object
     }
   },
 
   methods: {
     updateSearchAnswer (answer) {
-      this.clickedAnswer = answer
-      this.$emit('searchAnswer', answer)
+      if (answer.id) {
+        this.fields[answer.key].clickedAnswer.id = answer.id
+        this.$emit('searchAnswer', this.fields[answer.key].clickedAnswer)
+      } else {
+        this.$emit('searchAnswer', answer)
+      }
     }
   }
 }

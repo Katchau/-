@@ -115,7 +115,12 @@ export default {
               label: 'Stat list',
               isMinMax: true,
               isAutoComplete: true,
-              items: this.$store.getters.statInfo
+              items: this.$store.getters.statInfo,
+              clickedAnswer: {
+                id: undefined,
+                min: undefined,
+                max: undefined
+              }
             }
           ]
         }

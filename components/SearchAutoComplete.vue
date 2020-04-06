@@ -16,27 +16,27 @@ export default {
     field: {
       type: Object,
       required: true
+    },
+    listKey: {
+      type: Number,
+      required: false,
+      default: -1
     }
   },
 
   data () {
     return {
-      value: Object,
-      clickedAnswer: {}
+      value: Object
     }
   },
 
   watch: {
     value: {
       handler (answer) {
-        if (answer.id) {
-          this.clickedAnswer.id = answer.id
-          this.clickedAnswer.min = undefined
-          this.clickedAnswer.max = undefined
-          this.$emit('autoAnswer', this.clickedAnswer)
-        } else {
-          this.$emit('autoAnswer', answer)
+        if (this.listKey >= 0) {
+          answer.key = this.listKey
         }
+        this.$emit('autoAnswer', answer)
       }
     }
   },
