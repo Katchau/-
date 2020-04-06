@@ -4,13 +4,7 @@
       {{ name }}
     </span>
     <div v-for="(field, key) in fields" :key="key + field.label">
-      <v-autocomplete
-        v-if="field.isAutoComplete"
-        v-model="value"
-        :items="field.items"
-        :filter="customFilter"
-        :label="field.label"
-      />
+      <SearchAutoComplete :field="field" @autoAnswer="updateSearchAnswer" />
       <div v-if="field.isMinMax && !field.isAutoComplete">
         <v-text-field v-model="field.items[0].parameterValue" :label="field.items[0].label" />
         <v-text-field v-model="field.items[1].parameterValue" :label="field.items[1].label" />
@@ -24,8 +18,10 @@
 </template>
 
 <script>
+import SearchAutoComplete from './SearchAutoComplete'
 export default {
   name: 'SearchOptions',
+  components: { SearchAutoComplete },
 
   props: {
     name: {
@@ -46,29 +42,10 @@ export default {
     }
   },
 
-  watch: {
-    value: {
-      handler (answer) {
-        if (answer.id) {
-          this.clickedAnswer.stat = true
-          this.clickedAnswer.id = answer.id
-          this.clickedAnswer.min = undefined
-          this.clickedAnswer.max = undefined
-          this.$emit('searchAnswer', this.clickedAnswer)
-        } else {
-          this.$emit('searchAnswer', answer)
-        }
-      }
-    }
-  },
-
   methods: {
-    customFilter (item, queryText, itemText) {
-      const textOne = item.text.toLowerCase()
-      if (queryText === undefined) { return true }
-      const searchText = queryText.toLowerCase()
-
-      return textOne.includes(searchText)
+    updateSearchAnswer (answer) {
+      this.clickedAnswer = answer
+      this.$emit('searchAnswer', answer)
     }
   }
 }
