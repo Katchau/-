@@ -6,8 +6,8 @@
     <div v-for="(field, key) in fields" :key="key + field.label">
       <SearchAutoComplete :field="field" :list-key="key" @autoAnswer="updateSearchAnswer" />
       <div v-if="field.isMinMax && !field.isAutoComplete">
-        <v-text-field v-model="field.items[0].parameterValue" :label="field.items[0].label" />
-        <v-text-field v-model="field.items[1].parameterValue" :label="field.items[1].label" />
+        <v-text-field v-model="field.items[0].value.parameterValue" :label="field.items[0].label" />
+        <v-text-field v-model="field.items[1].value.parameterValue" :label="field.items[1].label" />
       </div>
       <span v-if="field.isMinMax && field.isAutoComplete && field.clickedAnswer.id">
         <v-text-field v-model="field.clickedAnswer.min" label="Min" />

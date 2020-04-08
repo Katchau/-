@@ -318,7 +318,7 @@ export default {
 
     // TODO be careful if the order is changed because this is depending on that
     updateMinMaxAnswers () {
-      const rowsWithMinMax = [...this.rows[0]]
+      const rowsWithMinMax = this.rows.slice(1, 3)
       rowsWithMinMax.forEach((row) => {
         row.forEach((columns) => {
           columns.fields.forEach((field) => {
@@ -364,6 +364,16 @@ export default {
       // TODO this is the lazy method, update this after if i want to lmao
       this.updateMinMaxAnswers()
       console.log(this.searchOptions)
+    },
+
+    async tempSend () {
+      await this.$axios.post('/search', this.searchOptions)
+        .then((result) => {
+          console.log(result)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
